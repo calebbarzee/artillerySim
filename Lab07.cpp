@@ -1,165 +1,235 @@
 /*************************************************************
  * 1. Name:
- *      The Key
+ *      Tyler Aston, Caleb Barzee
  * 2. Assignment Name:
- *      Lab 08: M777 Howitzer
+ *      LAB 07 : ARTILLERY PROTOTYPE
  * 3. Assignment Description:
- *      Simulate firing the M777 howitzer 15mm artillery piece
+ *      A prototype of a M777 Howitzer simulator.
  * 4. What was the hardest part? Be as specific as possible.
- *      ??
+ *
  * 5. How long did it take for you to complete the assignment?
- *      ??
- *****************************************************************/
+ *
+ **************************************************************/
 
-#include <cassert>      // for ASSERT
-#include "uiInteract.h" // for INTERFACE
-#include "uiDraw.h"     // for RANDOM and DRAW*
-#include "ground.h"     // for GROUND
-#include "position.h"   // for POSITION
+#include <iostream>  // for CIN and COUT
+#include "velocity.h"
+#include "acceleration.h"
+#include "position.h"
 using namespace std;
 
-/*************************************************************************
- * Demo
- * Test structure to capture the LM that will move around the screen
- *************************************************************************/
-class Demo
+// For PI, square root, sin, cos
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+// Shell properties
+#define MASS 46.7
+#define DIAMETER 0.15489
+#define RADIUS 0.077445
+#define SHELLAREA 0.018842
+
+/***************************************************
+ * COMPUTE DISTANCE
+ * Apply inertia to compute a new position using the distance equation.
+ * The equation is:
+ *     s = s + v t + 1/2 a t^2
+ * INPUT
+ *     s : original position, in meters
+ *     v : velocity, in meters/second
+ *     a : acceleration, in meters/second^2
+ *     t : time, in seconds
+ * OUTPUT
+ *     s : new position, in meters
+ **************************************************/
+double computeDis(double s, double v, double t, double a)
 {
-public:
-   Demo(Position ptUpperRight) :
-      ptUpperRight(ptUpperRight),
-      ground(ptUpperRight),
-      time(0.0),
-      angle(0.0)
-   {
-      // Set the horizontal position of the howitzer. This should be random.
-      ptHowitzer.setPixelsX(Position(ptUpperRight).getPixelsX() / 2.0);
-
-      // Generate the ground and set the vertical position of the howitzer.
-      ground.reset(ptHowitzer);
-
-      // This is to make the bullet travel across the screen. Notice how there are 
-      // 20 pixels, each with a different age. This gives the appearance
-      // of a trail that fades off in the distance.
-      for (int i = 0; i < 20; i++)
-      {
-         projectilePath[i].setPixelsX((double)i * 2.0);
-         projectilePath[i].setPixelsY(ptUpperRight.getPixelsY() / 1.5);
-      }
-   }
-
-   Ground ground;                 // the ground
-   Position  projectilePath[20];  // path of the projectile
-   Position  ptHowitzer;          // location of the howitzer
-   Position  ptUpperRight;        // size of the screen
-   double angle;                  // angle of the howitzer 
-   double time;                   // amount of time since the last firing
-};
-
-/*************************************
- * All the interesting work happens here, when
- * I get called back from OpenGL to draw a frame.
- * When I am finished drawing, then the graphics
- * engine will wait until the proper amount of
- * time has passed and put the drawing on the screen.
- **************************************/
-void callBack(const Interface* pUI, void* p)
+   // I added parenthesis to help visualize order of operations
+   return s + (v * t) + (0.5 * a) * (t * t);
+}
+/**************************************************
+ * COMPUTE ACCELERATION
+ * Find the acceleration given a thrust and mass.
+ * This will be done using Newton's second law of motion:
+ *     f = m * a
+ * INPUT
+ *     f : force, in Newtons (kg * m / s^2)
+ *     m : mass, in kilograms
+ * OUTPUT
+ *     a : acceleration, in meters/second^2
+ ***************************************************/
+double computeAccel(double f, double m)
 {
-   // the first step is to cast the void pointer into a game object. This
-   // is the first step of every single callback function in OpenGL. 
-   Demo* pDemo = (Demo*)p;
-
-   //
-   // accept input
-   //
-
-   // move a large amount
-   if (pUI->isRight())
-      pDemo->angle += 0.05;
-   if (pUI->isLeft())
-      pDemo->angle -= 0.05;
-
-   // move by a little
-   if (pUI->isUp())
-      pDemo->angle += (pDemo->angle >= 0 ? -0.003 : 0.003);
-   if (pUI->isDown())
-      pDemo->angle += (pDemo->angle >= 0 ? 0.003 : -0.003);
-
-   // fire that gun
-   if (pUI->isSpace())
-      pDemo->time = 0.0;
-
-   //
-   // perform all the game logic
-   //
-
-   // advance time by half a second.
-   pDemo->time += 0.5;
-
-   // move the projectile across the screen
-   for (int i = 0; i < 20; i++)
-   {
-      // this bullet is moving left at 1 pixel per frame
-      double x = pDemo->projectilePath[i].getPixelsX();
-      x -= 1.0;
-      if (x < 0)
-         x = pDemo->ptUpperRight.getPixelsX();
-      pDemo->projectilePath[i].setPixelsX(x);
-   }
-
-   //
-   // draw everything
-   //
-
-   ogstream gout(Position(10.0, pDemo->ptUpperRight.getPixelsY() - 20.0));
-
-   // draw the ground first
-   pDemo->ground.draw(gout);
-
-   // draw the howitzer
-   gout.drawHowitzer(pDemo->ptHowitzer, pDemo->angle, pDemo->time);
-
-   // draw the projectile
-   for (int i = 0; i < 20; i++)
-      gout.drawProjectile(pDemo->projectilePath[i], 0.5 * (double)i);
-
-   // draw some text on the screen
-   gout.setf(ios::fixed | ios::showpoint);
-   gout.precision(1);
-   gout << "Time since the bullet was fired: "
-        << pDemo->time << "s\n";
+   return f / m;
+}
+/***********************************************
+ * COMPUTE VELOCITY
+ * Starting with a given velocity, find the new
+ * velocity once acceleration is applied. This is
+ * called the Kinematics equation. The
+ * equation is:
+ *     v = v + a t
+ * INPUT
+ *     v : velocity, in meters/second
+ *     a : acceleration, in meters/second^2
+ *     t : time, in seconds
+ * OUTPUT
+ *     v : new velocity, in meters/second
+ ***********************************************/
+double computeVel(double v, double a, double t)
+{
+   // Returns new velocity
+   return v + a * t;
 }
 
-double Position::metersFromPixels = 40.0;
-
-/*********************************
- * Initialize the simulation and set it in motion
- *********************************/
-#ifdef _WIN32_X
-#include <windows.h>
-int WINAPI wWinMain(
-   _In_ HINSTANCE hInstance,
-   _In_opt_ HINSTANCE hPrevInstance,
-   _In_ PWSTR pCmdLine,
-   _In_ int nCmdShow)
-#else // !_WIN32
-int main(int argc, char** argv)
-#endif // !_WIN32
+/***********************************************
+ * COMPUTE VERTICAL COMPONENT
+ * Find the vertical component of a velocity or acceleration.
+ * The equation is:
+ *     cos(a) = y / total
+ * This can be expressed graphically:
+ *      x
+ *    +-----
+ *    |   /
+ *  y |  / total
+ *    |a/
+ *    |/
+ * INPUT
+ *     a : angle, in radians
+ *     total : total velocity or acceleration
+ * OUTPUT
+ *     y : the vertical component of the total
+ ***********************************************/
+double computeY(double a, double total)
 {
-   // Initialize OpenGL
-   Position ptUpperRight;
-   ptUpperRight.setPixelsX(700.0);
-   ptUpperRight.setPixelsY(500.0);
-   Position().setZoom(40.0 /* 42 meters equals 1 pixel */);
-   Interface ui(0, NULL,
-      "Demo",   /* name on the window */
-      ptUpperRight);
+   // Return Y
+   return cos(a) * total;
+}
+/***********************************************
+ * COMPUTE HORIZONTAL COMPONENT
+ * Find the horizontal component of a velocity or acceleration.
+ * The equation is:
+ *     sin(a) = x / total
+ * This can be expressed graphically:
+ *      x
+ *    +-----
+ *    |   /
+ *  y |  / total
+ *    |a/
+ *    |/
+ * INPUT
+ *     a : angle, in radians
+ *     total : total velocity or acceleration
+ * OUTPUT
+ *     x : the vertical component of the total
+ ***********************************************/
+double computeX(double a, double total)
+{
+   // Return x
+   return sin(a) * total;
+}
+/************************************************
+ * COMPUTE TOTAL COMPONENT
+ * Given the horizontal and vertical components of
+ * something (velocity or acceleration), determine
+ * the total component. To do this, use the Pythagorean Theorem:
+ *    x^2 + y^2 = t^2
+ * where:
+ *      x
+ *    +-----
+ *    |   /
+ *  y |  / total
+ *    | /
+ *    |/
+ * INPUT
+ *    x : horizontal component
+ *    y : vertical component
+ * OUTPUT
+ *    total : total component
+ ***********************************************/
+double computeTotal(double x, double y)
+{
+   // a^2 + b^2 = c^2
+   return sqrt((x * x) + (y * y));
+}
 
-   // Initialize the demo
-   Demo demo(ptUpperRight);
+/*************************************************
+ * RADIANS FROM DEGEES
+ * Convert degrees to radians:
+ *     radians / 2pi = degrees / 360
+ * INPUT
+ *     d : degrees from 0 to 360
+ * OUTPUT
+ *     r : radians from 0 to 2pi
+ **************************************************/
+double toRadians(double degrees)
+{
+   // I did some simplification
+   return degrees * M_PI / 180.0;
+}
+/**************************************************
+ * PROMPT
+ * A generic function to prompt the user for a double
+ * INPUT
+ *      message : the message to display to the user
+ * OUTPUT
+ *      response : the user's response
+ ***************************************************/
+double prompt(string message)
+{
+   double response;
+   // Prompt message
+   cout << message;
+   cin >> response;
 
-   // set everything into action
-   ui.run(callBack, &demo);
-
-
+   return response;
+}
+/****************************************************************
+ * MAIN
+ * Prompt for input, compute new position, and display output
+ ****************************************************************/
+int main()
+{
+   
+   // Prompt for input and variables to be computed
+   Velocity v;
+   Position pt;
+   double t = 0.01;
+   double aDegrees = prompt("What is the angle of the howitzer where 0 is up? ");
+   cout << endl;
+   
+   // Angle in radians
+   double aRadians = toRadians(aDegrees);
+   // Acceleration due to thrust
+   double accelerationThrust = computeAccel(THRUST, WEIGHT);
+   // Horizontal acceleration due to thrust
+   double ddxThrust = computeX(aRadians, accelerationThrust);
+   // Vertical acceleration due to thrust
+   double ddyThrust = computeY(aRadians, accelerationThrust);
+   // Total horizontal acceleration
+   double ddx = ddxThrust;
+   // Total vertical acceleration
+   double ddy = ddyThrust + GRAVITY;
+   // Total velocity
+   double v;
+   
+   // Go through the simulator five times
+   for (int i = 0; i < 5; i++) {
+      // Total horizontal velocity
+      //dx + ddxThrust * t equivalent to dx after following statement. (logic check)
+      dx += ddx * t;
+      // y acceleration = ddyThrust + gravity
+      // Total vertical velocity
+      dy += ddy * t;
+      // New total velocity
+      v = computeTotal(dx, dy);
+      // Compute distance traveled for each interval by x and y
+      x = computeDis(x, dx, t, ddx);
+      y = computeDis(y, dy, t, ddy);
+      // Output
+      cout.setf(ios::fixed | ios::showpoint);
+      cout.precision(2);
+      cout << "\tNew position:   (" <<  x << ", " <<  y << ")m\n";
+      cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
+      cout << "\tTotal velocity:  " << v << "m/s\n\n";
+   }
    return 0;
 }
