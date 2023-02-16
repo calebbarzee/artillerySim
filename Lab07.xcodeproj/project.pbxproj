@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FC0E63D299EA939002B307C /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0E63B299EA939002B307C /* velocity.cpp */; };
 		C18A024F27330881004537C6 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024327330880004537C6 /* ground.cpp */; };
-		C18A025027330881004537C6 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024727330880004537C6 /* test.cpp */; };
-		C18A025127330881004537C6 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024827330880004537C6 /* uiInteract.cpp */; };
-		C18A025227330881004537C6 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024A27330881004537C6 /* uiDraw.cpp */; };
 		C18A025327330881004537C6 /* Lab07.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024B27330881004537C6 /* Lab07.cpp */; };
 		C18A025427330881004537C6 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024E27330881004537C6 /* position.cpp */; };
 		C18A0258273308A4004537C6 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18A0256273308A4004537C6 /* GLUT.framework */; };
@@ -30,24 +28,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3F32DF29299EA84F003678E9 /* artillerySim */ = {isa = PBXFileReference; lastKnownFileType = folder; name = artillerySim; sourceTree = "<group>"; };
-		3F4083DF299EA81000C98B57 /* artillerySim */ = {isa = PBXFileReference; lastKnownFileType = folder; path = artillerySim; sourceTree = "<group>"; };
+		3FC0E636299EA901002B307C /* acceleration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = acceleration.h; sourceTree = "<group>"; };
+		3FC0E637299EA901002B307C /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		3FC0E63B299EA939002B307C /* velocity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
+		3FC0E63C299EA939002B307C /* velocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
 		C18A023927330832004537C6 /* Lab07 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab07; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18A024327330880004537C6 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
 		C18A024427330880004537C6 /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; };
 		C18A024527330880004537C6 /* ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ground.h; sourceTree = "<group>"; };
-		C18A024627330880004537C6 /* testPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testPosition.h; sourceTree = "<group>"; };
-		C18A024727330880004537C6 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
-		C18A024827330880004537C6 /* uiInteract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiInteract.cpp; sourceTree = "<group>"; };
-		C18A024927330880004537C6 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		C18A024A27330881004537C6 /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
 		C18A024B27330881004537C6 /* Lab07.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lab07.cpp; sourceTree = "<group>"; };
-		C18A024C27330881004537C6 /* uiDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiDraw.h; sourceTree = "<group>"; };
-		C18A024D27330881004537C6 /* uiInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiInteract.h; sourceTree = "<group>"; };
 		C18A024E27330881004537C6 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
 		C18A0256273308A4004537C6 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C18A0257273308A4004537C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		C1B0EA5A27E22792004C9F71 /* testGround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testGround.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,21 +58,15 @@
 		C18A023027330832004537C6 = {
 			isa = PBXGroup;
 			children = (
-				C1B0EA5A27E22792004C9F71 /* testGround.h */,
-				3F32DF29299EA84F003678E9 /* artillerySim */,
 				C18A024327330880004537C6 /* ground.cpp */,
 				C18A024527330880004537C6 /* ground.h */,
 				C18A024B27330881004537C6 /* Lab07.cpp */,
 				C18A024E27330881004537C6 /* position.cpp */,
 				C18A024427330880004537C6 /* position.h */,
-				C18A024727330880004537C6 /* test.cpp */,
-				C18A024927330880004537C6 /* test.h */,
-				C18A024627330880004537C6 /* testPosition.h */,
-				C18A024A27330881004537C6 /* uiDraw.cpp */,
-				C18A024C27330881004537C6 /* uiDraw.h */,
-				C18A024827330880004537C6 /* uiInteract.cpp */,
-				C18A024D27330881004537C6 /* uiInteract.h */,
-				3F4083DF299EA81000C98B57 /* artillerySim */,
+				3FC0E637299EA901002B307C /* constants.h */,
+				3FC0E636299EA901002B307C /* acceleration.h */,
+				3FC0E63B299EA939002B307C /* velocity.cpp */,
+				3FC0E63C299EA939002B307C /* velocity.h */,
 				C18A023A27330832004537C6 /* Products */,
 				C18A0255273308A4004537C6 /* Frameworks */,
 			);
@@ -160,12 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC0E63D299EA939002B307C /* velocity.cpp in Sources */,
 				C18A024F27330881004537C6 /* ground.cpp in Sources */,
-				C18A025027330881004537C6 /* test.cpp in Sources */,
 				C18A025427330881004537C6 /* position.cpp in Sources */,
 				C18A025327330881004537C6 /* Lab07.cpp in Sources */,
-				C18A025127330881004537C6 /* uiInteract.cpp in Sources */,
-				C18A025227330881004537C6 /* uiDraw.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
