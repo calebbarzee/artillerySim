@@ -117,9 +117,9 @@ map<double, double> gravity
 
 
 // drag force function
-double computeDrag()
+double computeDrag(double dragCo, double air, double v)
 {
-   
+   return 0.5 * dragCo * air * (v * v) * SHELLAREA;
 }
 
 // linear interpolation function
