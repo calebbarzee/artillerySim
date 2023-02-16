@@ -12,6 +12,7 @@
  **************************************************************/
 
 #include <iostream>  // for CIN and COUT
+#include <map>
 #include "velocity.h"
 #include "acceleration.h"
 #include "position.h"
@@ -27,129 +28,107 @@ using namespace std;
 #define RADIUS 0.077445
 #define SHELLAREA 0.018842
 
-/***************************************************
- * COMPUTE DISTANCE
- * Apply inertia to compute a new position using the distance equation.
- * The equation is:
- *     s = s + v t + 1/2 a t^2
- * INPUT
- *     s : original position, in meters
- *     v : velocity, in meters/second
- *     a : acceleration, in meters/second^2
- *     t : time, in seconds
- * OUTPUT
- *     s : new position, in meters
- **************************************************/
-double computeDis(double s, double v, double t, double a)
+// Tables
+// Drag Co
+map<double, double> dragCo
 {
-   // I added parenthesis to help visualize order of operations
-   return s + (v * t) + (0.5 * a) * (t * t);
-}
-/**************************************************
- * COMPUTE ACCELERATION
- * Find the acceleration given a thrust and mass.
- * This will be done using Newton's second law of motion:
- *     f = m * a
- * INPUT
- *     f : force, in Newtons (kg * m / s^2)
- *     m : mass, in kilograms
- * OUTPUT
- *     a : acceleration, in meters/second^2
- ***************************************************/
-double computeAccel(double f, double m)
+   {0.300, 0.1629 },
+   {0.500, 0.1659 },
+   {0.700, 0.2031 },
+   {0.890, 0.2597 },
+   {0.920, 0.3010 },
+   {0.960, 0.3287 },
+   {0.980, 0.4002 },
+   {1.000, 0.4258 },
+   {1.020, 0.4335 },
+   {1.060, 0.4483 },
+   {1.240, 0.4064 },
+   {1.530, 0.3663 },
+   {1.990, 0.2897 },
+   {2.870, 0.2297 },
+   {2.890, 0.2306 },
+   {5.000, 0.2656 }
+};
+
+// Air Density
+map<double, double> airDensity
 {
-   return f / m;
-}
-/***********************************************
- * COMPUTE VELOCITY
- * Starting with a given velocity, find the new
- * velocity once acceleration is applied. This is
- * called the Kinematics equation. The
- * equation is:
- *     v = v + a t
- * INPUT
- *     v : velocity, in meters/second
- *     a : acceleration, in meters/second^2
- *     t : time, in seconds
- * OUTPUT
- *     v : new velocity, in meters/second
- ***********************************************/
-double computeVel(double v, double a, double t)
+   {0,       1.2250000},
+   {1000,    1.1120000},
+   {2000,    1.0070000},
+   {3000,    0.9093000},
+   {4000,    0.8194000},
+   {5000,    0.7364000},
+   {6000,    0.6601000},
+   {7000,    0.5900000},
+   {8000,    0.5258000},
+   {9000,    0.4671000},
+   {10000,   0.4135000},
+   {15000,   0.1948000},
+   {20000,   0.0889100},
+   {25000,   0.0400800},
+   {30000,   0.0184100},
+   {40000,   0.0039960},
+   {50000,   0.0010270},
+   {60000,   0.0003097},
+   {70000,   0.0000828},
+   {80000,   0.0000185},
+};
+
+// Speed of Sound
+map<double, double> speedSound
 {
-   // Returns new velocity
-   return v + a * t;
+   {0,       340},
+   {1000,    336},
+   {2000,    332},
+   {3000,    328},
+   {4000,    324},
+   {5000,    320},
+   {6000,    316},
+   {7000,    312},
+   {8000,    308},
+   {9000,    303},
+   {10000,   299},
+   {15000,   295},
+   {20000,   295},
+   {25000,   295},
+   {30000,   305},
+   {40000,   324},
+};
+
+// Gravity
+map<double, double> gravity
+{
+   {0,     9.807},
+   {1000,  9.804},
+   {2000,  9.801},
+   {3000,  9.797},
+   {4000,  9.794},
+   {5000,  9.791},
+   {6000,  9.788},
+   {7000,  9.785},
+   {8000,  9.782},
+   {9000,  9.779},
+   {10000, 9.776},
+   {15000, 9.761},
+   {20000, 9.745},
+   {25000, 9.730},
+};
+
+
+// drag force function
+double computeDrag()
+{
+   
 }
 
-/***********************************************
- * COMPUTE VERTICAL COMPONENT
- * Find the vertical component of a velocity or acceleration.
- * The equation is:
- *     cos(a) = y / total
- * This can be expressed graphically:
- *      x
- *    +-----
- *    |   /
- *  y |  / total
- *    |a/
- *    |/
- * INPUT
- *     a : angle, in radians
- *     total : total velocity or acceleration
- * OUTPUT
- *     y : the vertical component of the total
- ***********************************************/
-double computeY(double a, double total)
+// linear interpolation function
+double linearInterpolate()
 {
-   // Return Y
-   return cos(a) * total;
+   
 }
-/***********************************************
- * COMPUTE HORIZONTAL COMPONENT
- * Find the horizontal component of a velocity or acceleration.
- * The equation is:
- *     sin(a) = x / total
- * This can be expressed graphically:
- *      x
- *    +-----
- *    |   /
- *  y |  / total
- *    |a/
- *    |/
- * INPUT
- *     a : angle, in radians
- *     total : total velocity or acceleration
- * OUTPUT
- *     x : the vertical component of the total
- ***********************************************/
-double computeX(double a, double total)
-{
-   // Return x
-   return sin(a) * total;
-}
-/************************************************
- * COMPUTE TOTAL COMPONENT
- * Given the horizontal and vertical components of
- * something (velocity or acceleration), determine
- * the total component. To do this, use the Pythagorean Theorem:
- *    x^2 + y^2 = t^2
- * where:
- *      x
- *    +-----
- *    |   /
- *  y |  / total
- *    | /
- *    |/
- * INPUT
- *    x : horizontal component
- *    y : vertical component
- * OUTPUT
- *    total : total component
- ***********************************************/
-double computeTotal(double x, double y)
-{
-   // a^2 + b^2 = c^2
-   return sqrt((x * x) + (y * y));
-}
+
+// calc angle = tang inverse x/y
 
 /*************************************************
  * RADIANS FROM DEGEES
@@ -198,38 +177,12 @@ int main()
    
    // Angle in radians
    double aRadians = toRadians(aDegrees);
-   // Acceleration due to thrust
-   double accelerationThrust = computeAccel(THRUST, WEIGHT);
-   // Horizontal acceleration due to thrust
-   double ddxThrust = computeX(aRadians, accelerationThrust);
-   // Vertical acceleration due to thrust
-   double ddyThrust = computeY(aRadians, accelerationThrust);
-   // Total horizontal acceleration
-   double ddx = ddxThrust;
-   // Total vertical acceleration
-   double ddy = ddyThrust + GRAVITY;
-   // Total velocity
-   double v;
    
-   // Go through the simulator five times
-   for (int i = 0; i < 5; i++) {
-      // Total horizontal velocity
-      //dx + ddxThrust * t equivalent to dx after following statement. (logic check)
-      dx += ddx * t;
-      // y acceleration = ddyThrust + gravity
-      // Total vertical velocity
-      dy += ddy * t;
-      // New total velocity
-      v = computeTotal(dx, dy);
-      // Compute distance traveled for each interval by x and y
-      x = computeDis(x, dx, t, ddx);
-      y = computeDis(y, dy, t, ddy);
-      // Output
-      cout.setf(ios::fixed | ios::showpoint);
-      cout.precision(2);
-      cout << "\tNew position:   (" <<  x << ", " <<  y << ")m\n";
-      cout << "\tNew velocity:   (" << dx << ", " << dy << ")m/s\n";
-      cout << "\tTotal velocity:  " << v << "m/s\n\n";
-   }
+   // air density
+
+   // speed of sound
+
+   // gravity
+   
    return 0;
 }
