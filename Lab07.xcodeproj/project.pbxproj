@@ -32,6 +32,8 @@
 		3FC0E637299EA901002B307C /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		3FC0E63B299EA939002B307C /* velocity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
 		3FC0E63C299EA939002B307C /* velocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
+		3FC0E63E299EF89D002B307C /* angle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = angle.cpp; sourceTree = "<group>"; };
+		3FC0E63F299EF89D002B307C /* angle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = angle.h; sourceTree = "<group>"; };
 		C18A023927330832004537C6 /* Lab07 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab07; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18A024327330880004537C6 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
 		C18A024427330880004537C6 /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; };
@@ -58,15 +60,17 @@
 		C18A023027330832004537C6 = {
 			isa = PBXGroup;
 			children = (
-				C18A024327330880004537C6 /* ground.cpp */,
-				C18A024527330880004537C6 /* ground.h */,
+				3FC0E63E299EF89D002B307C /* angle.cpp */,
+				3FC0E63F299EF89D002B307C /* angle.h */,
 				C18A024B27330881004537C6 /* Lab07.cpp */,
+				3FC0E637299EA901002B307C /* constants.h */,
 				C18A024E27330881004537C6 /* position.cpp */,
 				C18A024427330880004537C6 /* position.h */,
-				3FC0E637299EA901002B307C /* constants.h */,
-				3FC0E636299EA901002B307C /* acceleration.h */,
 				3FC0E63B299EA939002B307C /* velocity.cpp */,
 				3FC0E63C299EA939002B307C /* velocity.h */,
+				3FC0E636299EA901002B307C /* acceleration.h */,
+				C18A024327330880004537C6 /* ground.cpp */,
+				C18A024527330880004537C6 /* ground.h */,
 				C18A023A27330832004537C6 /* Products */,
 				C18A0255273308A4004537C6 /* Frameworks */,
 			);
