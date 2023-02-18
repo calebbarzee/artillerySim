@@ -35,11 +35,26 @@ double computeDragAcceleration(double dragCo, double air, double v)
 }
 
 // linear interpolation function
-//double linearInterpolate()
-//{
-//
-//}
+double linearInterpolation(map<double, double>& table, double x)
+{
+   map<double, double>::iterator it;
 
+   for (it = table.begin(); it != table.end(); it++)
+   {
+      if (it->first > x)
+      {
+         double xOne = it->first;
+         double xTwo = (it++)->first;
+         double yOne = it->second;
+         double yTwo = (it++)->second;
+         double y = yOne + ((x - xOne) * (yTwo - yOne) / (xTwo - xOne));
+
+         return y;
+      }
+
+   }
+   return 0;
+}
 
 
 // calc angle = tang inverse x/y
