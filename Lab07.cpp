@@ -34,22 +34,26 @@ double computeDragAcceleration(double dragCo, double air, double v)
    return (0.5 * dragCo * air * (v * v) * constants::SHELL_AREA)/constants::SHELL_MASS;
 }
 
-// linear interpolation function
+/*********************************************************************
+ * LINEAR INTERPOLATION
+ * Accept a map which will be taveresed looking for where 'x' is
+ * between to values and perform linear interpolation to find x's 
+ * coresponding value pair and return it.
+ ********************************************************************/
 double linearInterpolation(map<double, double>& table, double x)
 {
+   // Needed to iterate through map
    map<double, double>::iterator it;
-
+   // Traverse map looking for value greater than x
    for (it = table.begin(); it != table.end(); it++)
    {
       if (it->first > x)
       {
-         double xOne = it->first;
-         double xTwo = (it++)->first;
-         double yOne = it->second;
-         double yTwo = (it++)->second;
-         double y = yOne + ((x - xOne) * (yTwo - yOne) / (xTwo - xOne));
-
-         return y;
+         // xOne = it->first;
+         // xTwo = (it++)->first;
+         // yOne = it->second;
+         // yTwo = (it++)->second;
+         return it->second + ((x - it->first) * ((it++)->second - it->second) / ((it++)->first - it->first));
       }
 
    }
@@ -57,7 +61,11 @@ double linearInterpolation(map<double, double>& table, double x)
 }
 
 
+
+
 // calc angle = tang inverse x/y
+
+
 
 
 /**************************************************
@@ -77,6 +85,7 @@ double prompt(string message)
 
    return response;
 }
+
 /****************************************************************
  * MAIN
  * Prompt for input, compute new position, and display output
