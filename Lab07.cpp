@@ -30,44 +30,37 @@ double computeDragAcceleration(double dragCoefficient, double airDensity, double
 {
    return (0.5 * dragCoefficient * airDensity * (velocity * velocity) * constants::SHELL_AREA)/constants::SHELL_MASS;
 }
-
+/*********************************************************************
+ * INTERPOLATE
+ * Accepts some values, and returns the resulting interpolated value
+ ********************************************************************/
+double interpolate(double a,double a0,double a1,double b0,double b1)
+{
+   return b0 + ((a - a0)*(b1 - b0))/(a1 - a0);
+}
 /*********************************************************************
  * LINEAR INTERPOLATION
- * Accept a map which will be taveresed looking for where 'x' is
- * between to values and perform linear interpolation to find x's 
+ * Accept a map which will be taveresed looking for where 'a' is
+ * between to values and perform linear interpolation to find a's
  * coresponding value pair and return it.
  ********************************************************************/
-double linearInterpolation(map<double, double>& table, double x)
+double linearInterpolation(map<double, double>& table, double a)
 {
    //Need to assert that the value given is never not contained within the range of the data set given
-   
-   // Needed to iterate through map
-   map<double, double>::iterator it;
-   // Traverse map looking for value greater than x
-   for (it = table.begin(); it != table.end(); it++)
-   {
-      if (it->first >= x)
+   auto it = table.lower_bound(a);
+      if (it->first == a)
       {
-         if (it->first == x)
-         {
-            return it->second;
-         }
-         // xOne = it->first;
-         // xTwo = (it++)->first;
-         // yOne = it->second;
-         // yTwo = (it++)->second;
-         return it->second + ((x - it->first) * ((it++)->second - it->second) / ((it++)->first - it->first));
+         return it->second;
       }
-
-   }
+   it--; //off by one?
+   double a0 = it->first;
+   double b0 = it->second;
+   double a1 = (++it)->first;
+   double b1 = it->second;
+   double b = interpolate(a, a0, a1, b0, b1);
+   return b;
    return -1; //negative value represents invalid state
 }
-
-
-
-
-// calc angle = tang inverse x/y
-
 
 
 
@@ -115,10 +108,15 @@ int main()
 //   double aDegrees = 8 * M_PI;
 //   Angle angle = Angle(aDegrees);
 //   assert (angle.getRadians() == 0);
+   
+// quick test of linear interpolation
+//   double testAltitude = 200;
+//   cout << linearInterpolation(constants::AIR_DENSITY, testAltitude);
    velocity.calcDx(constants::EXIT_VELOCITY, angle.getRadians());
    velocity.calcDy(constants::EXIT_VELOCITY, angle.getRadians());
    double elapsedTime = 0.0;
-   double lastKnownDistance;
+   double lastX;
+   double lastY;
    do
    {
       angle.setRadians(velocity.getAngle());
@@ -134,11 +132,12 @@ int main()
       //adding pi to apply acceleration opposite to direction
       acceleration.setDdy(acceleration.getDdy() - gravity); //adding gravity to ddy
       velocity.add(acceleration, time);
-      lastKnownDistance = position.getMetersX();
+      lastX = position.getMetersX();
+      lastY = position.getMetersY();
       position.add(acceleration, velocity, time);
       elapsedTime += time;
    }  while (position.getMetersY() > 0);
-   double finalPosition = lastKnownDistance + 0.5*(position.getMetersX() - lastKnownDistance);
+   double finalPosition = interpolate(0, lastY, position.getMetersY(), lastX, position.getMetersX());
    cout.setf(ios::fixed);
    cout.precision(1);
    cout << "Distance:      " << finalPosition << "m       " << "Hang Time:      "

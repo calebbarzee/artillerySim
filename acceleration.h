@@ -29,8 +29,8 @@ public:
    void setDdy(double ddy) { this->ddy = ddy; }
 
    // Compute vector components of velocity
-   void calcDdx(double a, double angle) { ddx = a*sin(angle);}
-   void calcDdy(double a, double angle) { ddy = a*cos(angle);}
+   void calcDdx(double a, double angle) { ddx = sin(angle) * a;}
+   void calcDdy(double a, double angle) { ddy = cos(angle) * a;}
 private:
    double ddx;
    double ddy;

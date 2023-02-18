@@ -32,8 +32,8 @@ public:
    void setDy(double dy) { this->dy = dy; }
 
    // Compute vector components of velocity
-   void calcDx(double v, double angle) { dx = v*sin(angle);}
-   void calcDy(double v, double angle) { dy = v*cos(angle);}
+   void calcDx(double v, double angle) { dx = sin(angle) * v;}
+   void calcDy(double v, double angle) { dy = cos(angle) * v;}
    // Compute new velocity
    void add(const Acceleration & a, float t);
 
