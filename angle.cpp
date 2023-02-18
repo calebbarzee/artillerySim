@@ -5,7 +5,7 @@
  * Normalize
  * Takes an angle in radians and constrains it to range [0, 2pi)
  ****************************************************************************/
-double Angle::normalize(double angle)
+double Angle :: normalize(double angle)
 {
    angle = fmod(angle, 2 * M_PI);
    if (angle < 0)

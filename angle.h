@@ -37,18 +37,17 @@ public:
 private:
    // Attributes
    double aRadians;
-   
+   // Normalize angle
+   static double normalize(double angle);
    //Convert to Degrees
-   double convertToDegrees(double radians) const
+   static double convertToDegrees(double radians)
    {
       return radians * 180 / M_PI; //3.14159265358979323846
    }
    
    // Convert to Radians
-   double convertToRadians(double degrees) const
+   static double convertToRadians(double degrees)
    {
       return degrees * M_PI / 180;
    }
-   // Normalize angle
-   double normalize(double angle);
 };

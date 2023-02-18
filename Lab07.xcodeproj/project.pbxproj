@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F50F80F29A15E3E0099D48E /* angle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0E63E299EF89D002B307C /* angle.cpp */; };
 		3FC0E63D299EA939002B307C /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FC0E63B299EA939002B307C /* velocity.cpp */; };
 		C18A024F27330881004537C6 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024327330880004537C6 /* ground.cpp */; };
 		C18A025327330881004537C6 /* Lab07.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18A024B27330881004537C6 /* Lab07.cpp */; };
@@ -120,7 +121,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					C18A023827330832004537C6 = {
 						CreatedOnToolsVersion = 13.1;
@@ -150,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F50F80F29A15E3E0099D48E /* angle.cpp in Sources */,
 				3FC0E63D299EA939002B307C /* velocity.cpp in Sources */,
 				C18A024F27330881004537C6 /* ground.cpp in Sources */,
 				C18A025427330881004537C6 /* position.cpp in Sources */,
@@ -194,6 +196,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -253,6 +256,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -274,7 +278,9 @@
 		C18A024127330832004537C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -282,7 +288,9 @@
 		C18A024227330832004537C6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

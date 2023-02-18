@@ -17,40 +17,9 @@ Position::Position(double x, double y) : x(0.0), y(0.0)
    setMetersY(y);
 }
 
-/******************************************
- * POINT : ASSIGNMENT
- * Assign a point
- *****************************************/
-Position& Position::operator = (const Position& pt)
+void Position :: add(const Acceleration & a, const Velocity & v, float t)
 {
-   x = pt.x;
-   y = pt.y;
-   return *this;
-}
-
-
-/******************************************
- * POSITION insertion
- *       Display coordinates on the screen
- *****************************************/
-std::ostream& operator << (std::ostream& out, const Position& pt)
-{
-   out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << "m)";
-   return out;
-}
-   
-/*******************************************
-* POSITION extraction
-*       Prompt for coordinates
-******************************************/
-std::istream& operator >> (std::istream& in, Position& pt)
-{
-   double x;
-   double y;
-   in >> x >> y;
-
-   pt.setMetersX(x);
-   pt.setMetersY(y);
-
-   return in;
+   addMetersX((v.getDx() * t) + (0.5 * a.getDdx()) * (t * t));
+   addMetersY((v.getDy() * t) + (0.5 * a.getDdy()) * (t * t));
+   // using addMetersX and addMetersY in case of method containing additional data validation
 }

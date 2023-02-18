@@ -17,6 +17,7 @@ namespace constants
    
    constexpr float SHELL_MASS {46.7}; //kilograms
    constexpr float SHELL_AREA {0.018842}; //meters^2
+   constexpr double EXIT_VELOCITY {827.0}; //meters/s
    
    // Lookup Tables
    std::map<double, double> DRAG_COEFFICIENT

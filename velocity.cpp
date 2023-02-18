@@ -15,6 +15,12 @@ double Velocity::getSpeed() const
    return sqrt((dx * dx) + (dy * dy));
 }
 
+//returns the current angle of object in radians
+double Velocity::getAngle() const
+{
+   return atan(dx/dy);
+}
+
 void Velocity::add(const Acceleration & a, float t)
 {
    setDx(dx + a.getDdx() * t);
