@@ -6,6 +6,7 @@
  * Summary:
  *    This ensures that constants are defined once and easily refactorable.
  ************************************************************************/
+#pragma once
 #include <map>
 
 namespace constants

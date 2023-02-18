@@ -1,6 +1,5 @@
+#pragma once
 #include <math.h>
-#include <iostream>
-using namespace::std;
 /****************************************************************************
  * Class: ANGLE
  *    This class will handle setting aRadians, converting degrees to radians
@@ -36,35 +35,20 @@ public:
    }
 
 private:
-   //attributes
+   // Attributes
    double aRadians;
-   /*************************************************
-    * Convert to Degrees
-    *     radians / 2pi = degrees / 360
-    * INPUT
-    *     r : radians
-    * OUTPUT
-    *     d : degrees
-    **************************************************/
+   
+   //Convert to Degrees
    double convertToDegrees(double radians) const
    {
       return radians * 180 / M_PI; //3.14159265358979323846
    }
-   /*************************************************
-    * Convert to Radians
-    *     radians / 2pi = degrees / 360
-    * INPUT
-    *     d : degrees
-    * OUTPUT
-    *     r : radians
-    **************************************************/
+   
+   // Convert to Radians
    double convertToRadians(double degrees) const
    {
       return degrees * M_PI / 180;
    }
-   /****************************************************************************
-    * Normalize
-    * Takes an angle in radians and constrains it to range [0, 2pi)
-    ****************************************************************************/
+   // Normalize angle
    double normalize(double angle);
 };

@@ -1,5 +1,6 @@
+
 #include "angle.h"
-#include <math.h>
+
 /****************************************************************************
  * Normalize
  * Takes an angle in radians and constrains it to range [0, 2pi)

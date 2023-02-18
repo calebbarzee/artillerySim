@@ -10,7 +10,6 @@
  * 5. How long did it take for you to complete the assignment?
  *
  **************************************************************/
-#pragma once
 #include <cassert>
 #include <iostream>
 #include <math.h>
@@ -23,12 +22,10 @@
 
 using namespace std;
 
-
-
-// Shell properties
-
-
-// drag force function
+/*********************************************************************
+ * COMPUTE DRAG ACCELERATION
+ * Implementation of the drag force equation.
+ ********************************************************************/
 double computeDragAcceleration(double dragCo, double air, double v)
 {
    return (0.5 * dragCo * air * (v * v) * constants::SHELL_AREA)/constants::SHELL_MASS;
@@ -68,14 +65,14 @@ double linearInterpolation(map<double, double>& table, double x)
 
 
 
-/**************************************************
+/****************************************************************
  * PROMPT
  * A generic function to prompt the user for a double
  * INPUT
  *      message : the message to display to the user
  * OUTPUT
  *      response : the user's response
- ***************************************************/
+ ****************************************************************/
 double prompt(string message)
 {
    double response;
