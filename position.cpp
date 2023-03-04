@@ -10,16 +10,49 @@
 #include "position.h"
 #include <cassert>
 
-
+/******************************************
+* POINT : non-default constructor
+* create a point in x,y in meters
+*****************************************/
 Position::Position(double x, double y) : x(0.0), y(0.0)
 {
    setMetersX(x);
    setMetersY(y);
 }
 
-void Position :: add(const Acceleration & a, const Velocity & v, float t)
+/******************************************
+ * POINT : ASSIGNMENT
+ * Assign a point
+ *****************************************/
+Position& Position::operator = (const Position& pt)
 {
-   addMetersX((v.getDx() * t) + (0.5 * a.getDdx()) * (t * t));
-   addMetersY((v.getDy() * t) + (0.5 * a.getDdy()) * (t * t));
-   // using addMetersX and addMetersY in case of method containing additional data validation
+   x = pt.x;
+   y = pt.y;
+   return *this;
+}
+
+/******************************************
+ * POSITION insertion
+ *       Display position on the screen
+ *****************************************/
+std::ostream& operator << (std::ostream& out, const Position& pt)
+{
+   out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << ",)";
+   return out;
+}
+
+/*******************************************
+* POSITION extraction
+*       Prompt for coordinates
+******************************************/
+std::istream& operator >> (std::istream& in, Position& pos)
+{
+   double x;
+   double y;
+   in >> x >> y;
+
+   pos.setMetersX(x);
+   pos.setMetersY(y);
+
+   return in;
 }
