@@ -6,10 +6,12 @@
  * Summary:
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
+#pragma once
 
 #include "position.h"
 #include <cassert>
 
+double Position::metersFromPixels = 1100; // constant zoom level
 /******************************************
 * POINT : non-default constructor
 * create a point in x,y in meters
@@ -29,6 +31,7 @@ Position& Position::operator = (const Position& pt)
    x = pt.x;
    y = pt.y;
    return *this;
+
 }
 
 /******************************************
@@ -55,4 +58,9 @@ std::istream& operator >> (std::istream& in, Position& pos)
    pos.setMetersY(y);
 
    return in;
+}
+void Position::add(const Velocity & velocity, const Acceleration & acceleration, const double t)
+{
+   addMetersX((velocity.getDx() * t) + (0.5 * acceleration.getDdx()) * (t * t));
+   addMetersY((velocity.getDy() * t) + (0.5 * acceleration.getDdy()) * (t * t));
 }

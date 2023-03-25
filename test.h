@@ -1,12 +1,10 @@
-/***********************************************************************
- * Heaader File:
- *    Test : Test runner
+/****************************************************************************
+ * Header File:
+ *    Test: Import all test classes to be tested
  * Author:
- *    Br. Helfrich
+ *    Caleb Barzee
  * Summary:
- *    The test runner for all the unit tests
- ************************************************************************/
-
-#pragma once
+ *   Test all test classes
+ ***************************************************************************/
 
 void testRunner();

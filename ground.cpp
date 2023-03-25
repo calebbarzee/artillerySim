@@ -8,8 +8,9 @@
  ************************************************************************/
 
 #include "ground.h"   // for the Ground class definition
-#include "uiDraw.h"   // for random() and drawLine()
 #include <cassert>
+
+
 
 const int WIDTH_HOWITZER = 14;
 
@@ -18,6 +19,40 @@ const double MAX_ALTITUDE = 3000.0; // max altitude is 3,000m or 9842.52ft
 const double MAX_SLOPE = 1.0; // steapness of the features. Smaller number is flatter
 const double LUMPINESS = 0.15; // size of the hills. Smaller number is bigger features
 const double TEXTURE = 3.0;   // size of the small features such as rocks
+
+
+/******************************************************************
+ * RANDOM
+ * This function generates a random number.
+ *
+ *    INPUT:   min, max : The number of values (min <= num <= max)
+ *    OUTPUT   <return> : Return the integer
+ ****************************************************************/
+int random(int min, int max)
+{
+   assert(min < max);
+   int num = (rand() % (max - min)) + min;
+   assert(min <= num && num <= max);
+
+   return num;
+}
+
+/******************************************************************
+ * RANDOM
+ * This function generates a random number.
+ *
+ *    INPUT:   min, max : The number of values (min <= num <= max)
+ *    OUTPUT   <return> : Return the double
+ ****************************************************************/
+double random(double min, double max)
+{
+   assert(min <= max);
+   double num = min + ((double)rand() / (double)RAND_MAX * (max - min));
+   
+   assert(min <= num && num <= max);
+
+   return num;
+}
 
 /************************************************************************
  * GROUND :: CONSTRUCTOR
@@ -122,67 +157,4 @@ Position Ground::getTarget() const
 
    // set the howitzer's elevation
    posHowitzer.setPixelsY(ground[iHowitzer]);
-}
-
-/*****************************************************************
- * GROUND :: DRAW
- * Draw the ground on the screen
- ****************************************************************/
-void Ground::draw(ogstream & gout) const
-{
-   // put the meter markers along the side
-   for (Position pos(0.0, 1000.0); pos.getPixelsY() < posUpperRight.getPixelsY(); pos.addMetersY(1000.0))
-   {
-      Position posLeft(pos);
-      Position posRight(pos);
-      posRight.setPixelsX(posUpperRight.getPixelsX());
-      gout.drawLine(posLeft, posRight, 0.85, 0.85, 0.85);
-   }
-
-   // iterate through the entire ground and draw it all
-   int width = (int)posUpperRight.getPixelsX();
-   for (int i = 0; i < width; i++)
-   {
-      Position posBottom;
-      Position posTop;
-      posBottom.setPixelsX((double)i);
-      posTop.setPixelsX((double)i + 1.0);
-      posTop.setPixelsY(ground[i]);
-      gout.drawRectangle(posBottom, posTop, 0.6 /*red*/, 0.4 /*green*/, 0.2 /*blue*/);
-   }
-
-   // draw the target
-   Position posTarget = getTarget();
-   gout.drawTarget(posTarget);
-
-   // put the kilometer markers along the bottom
-   for (Position pos(1000.0, 0.0); pos.getPixelsX() < posUpperRight.getPixelsX(); pos.addMetersX(1000.0))
-   {
-      Position posBottom(pos);
-      Position posTop(pos);
-      posTop.addPixelsY(10);
-      gout.drawLine(posTop, posBottom, 0.6, 0.6, 0.6);
-   }
-
-   // put the kilometer labels along the bottom
-   for (Position pos(5000.0, 0.0); pos.getPixelsX() < posUpperRight.getPixelsX(); pos.addMetersX(5000.0))
-   {
-      Position posText(pos);
-      posText.addPixelsY(15);
-      posText.addPixelsX(-10);
-
-      gout = posText;
-      gout << (int)(pos.getMetersX() / 1000.0) << "km";
-   }
-
-   // draw the altitude labels along the side
-   for (Position pos(0.0, 2000.0); pos.getPixelsY() < posUpperRight.getPixelsY(); pos.addMetersY(2000.0))
-   {
-      Position posText(pos);
-      posText.addPixelsX(5);
-      posText.addPixelsY(-2);
-
-      gout = posText;
-      gout << (int)(pos.getMetersY()) << "m";
-   }
 }

@@ -1,102 +1,207 @@
 /****************************************************************************
- * Header File:
- *    Direction : Represents the direction/angle of an object.
- * Author:
- *    Caleb Barzee
- * Summary:
- *    Store, access, and manage the direction/angle of an object.
+ *  File: direction.h
  ***************************************************************************/
 #pragma once
 #include <math.h>
+#include <iostream>
+#include <iomanip>
  
- class TestDirection;
 /****************************************************************************
-  * Class: DIRECTION
-  * Attributes: 
-  *   - aRadians (double): represents the angle in radians
-  * Methods:
-  *  - Direction(): default constructor
-  *  - Direction(double): constructor given an angle in degrees
-  *  - Direction(const Direction &): copy constructor
-  *  - getRadians(): returns the angle in radians
-  *  - getDegrees(): returns the angle in degrees
-  *  - setRadians(double): given an angle in radians, sets the angle
-  *  - setDegrees(double): given an angle in degrees, sets the angle
-  *  - normalize(double): constrains the angle to range [0, 2pi)
-  *  - convertToDegrees(double): converts radians to degrees
-  *  - convertToRadians(double): converts degrees to radians
-  *  - setDown(): sets the angle to 180 degrees
-  *  - setLeft(): sets the angle to 270 degrees
-  *  - setRight(): sets the angle to 90 degrees
-  *  - setUp(): sets the angle to 0 degrees
-  *  - reverse(): sets the angle to the opposite direction
+  * Class: Direction
+  * Purpose: This class represents a direction in degrees or radians.
   ***************************************************************************/
+ class TestDirection;
+ class TestProjectile;
+ class TestArtillery;
+
 class Direction
 {
-public:
    friend class TestDirection;
-   //constructors
-   Direction():aRadians(0.0){}
-   Direction(double aDegrees):aRadians(normalize(convertToRadians(aDegrees))){}
-   Direction(const Direction & rhs):aRadians(rhs.aRadians){}
-   //getters
+   friend class TestProjectile;
+   friend class TestArtillery;
+   
+   /****************************************************************************
+    * Public Methods:
+    *   Direction(), Direction(double), Direction(const Direction &), getRadians(), getDegrees(),
+    *   setRadians(double), setDegrees(double), setDown(), setLeft(), setUp(),
+    *   setRight(), reverse()
+    ****************************************************************************/
+public:
+   
+   /****************************************************************************
+    * Constructors:
+    *   default constructor, non-default constructor, copy constructor
+    ****************************************************************************/
+   
+   /****************************************************************************
+    * Direction():
+    *   default constructor initializes direction to 0.0.
+    ****************************************************************************/
+   Direction():radians(0.0){}
+   
+   /****************************************************************************
+    * Direction(double):
+    *   non-default constructor initialize direction to given degrees.
+    ****************************************************************************/
+   Direction(double aDegrees):radians(normalize(convertToRadians(aDegrees))){}
+   
+   /****************************************************************************
+    * Direction(const Direction &):
+    *   copy constructor initialize direction to other direction's radians value
+    ****************************************************************************/
+   Direction(const Direction & rhs):radians(rhs.radians){}
+
+   
+   /****************************************************************************
+    * getRadians():
+    *   returns direction in radians between (-pi, pi].
+    ****************************************************************************/
    double getRadians() const
    {
-      return aRadians;
+      return radians;
    }
+   
+   /****************************************************************************
+    * getDegrees():
+    *   returns direction in degrees between (-180, 180].
+    ****************************************************************************/
    double getDegrees() const
    {
-      return convertToDegrees(aRadians);
+      return convertToDegrees(radians);
    }
-   //setters
-   //pass in an angle in radians
-   void setRadians(double angle)
+
+   /****************************************************************************
+    * setRadians(double):
+    *   given an direction in radians, normalizes the direction and sets radians.
+    ****************************************************************************/
+   void setRadians(double direction)
    {
-      aRadians = normalize(angle);
+      radians = normalize(direction);
    }
-   //pass in an angle in degrees
-   void setDegrees(double angle)
+   
+   /****************************************************************************
+    * setDegrees(double):
+    *   given an direction in degrees, converts to radians, normalizes, and sets radians.
+    ****************************************************************************/
+   void setDegrees(double direction)
    {
-      aRadians = normalize(convertToRadians(angle));
+      radians = normalize(convertToRadians(direction));
    }
-   //set down, set the angle to 180 degrees
+   
+   /****************************************************************************
+    * setDown():
+    *   sets radians to pi. (180 degrees)
+    ****************************************************************************/
    void setDown()
    {
-      aRadians = M_PI;
+      radians = normalize(M_PI);
    }
-   //set left, set the angle to 270 degrees
+   
+   /****************************************************************************
+    * setLeft():
+    *   sets radians to 3*pi/2. (270 degrees)
+    ****************************************************************************/
    void setLeft()
    {
-      aRadians = 3 * M_PI / 2;
+      radians = normalize(3 * M_PI / 2);
    }
-   //set right, set the angle to 90 degrees
+
+   /****************************************************************************
+    * setRight():
+    *   sets radians to pi/2. (90 degrees)
+    ****************************************************************************/
    void setRight()
    {
-      aRadians = M_PI / 2;
+      radians = normalize(M_PI / 2);
    }
-   //set up, set the angle to 0 degrees
+   
+   /****************************************************************************
+    * setUp():
+    *   sets radians to 0. (0 degrees)
+   ****************************************************************************/
    void setUp()
    {
-      aRadians = 0;
+      radians = normalize(0);
    }
-   //reverse, set the angle to the opposite direction
+   
+   /****************************************************************************
+    * reverse():
+    *   sets radians to the opposite direction by adding pi (180 degrees).
+    ****************************************************************************/
    void reverse()
    {
-      aRadians = normalize(aRadians + M_PI);
+      radians = normalize(radians + M_PI);
+   }
+
+   /****************************************************************************
+    * Operater Overload ++x ():
+    *   Prefix increment, increases the direction by 1 degree.
+    ****************************************************************************/
+   Direction & operator ++()
+   {
+      radians = normalize(radians + convertToRadians(1));
+      return *this;
+   }
+
+   /****************************************************************************
+    * Operater Overload x++ ():
+    *   Postfix increment, increases the angel by 1 degree.
+    ****************************************************************************/
+   Direction operator ++(int postfix)
+   {
+      Direction temp(*this);
+      radians = normalize(radians + convertToRadians(1));
+      return temp;
+   }
+
+   /****************************************************************************
+    * Operater Overload --x ():
+    *   Prefix decrement, decreases the direction by 1 degree.
+    ****************************************************************************/
+   Direction & operator --()
+   {
+      radians = normalize(radians - convertToRadians(1));
+      return *this;
+   }
+
+   /****************************************************************************
+    * Operater Overload x-- ():
+    *   Postfix decrement, decreases the direction by 1 degree.
+    ****************************************************************************/
+   Direction operator --(int postfix)
+   {
+      Direction temp(*this);
+      radians = normalize(radians - convertToRadians(1));
+      return temp;
    }
 
 private:
-   // Attributes
-   double aRadians;
-   // Normalize angle
-   static double normalize(double angle);
-   //Convert to Degrees
+   /****************************************************************************
+    * Attributes:
+    *    radians: the direction represented in radians.
+    ****************************************************************************/
+   double radians;
+   
+   /****************************************************************************
+    * Private Methods:
+    *   normalize(double), convertToDegrees(double), convertToRadians(double)
+    ****************************************************************************/
+   
+   static double normalize(double radians);
+   
+   /****************************************************************************
+    * Convert To Degrees:
+    *    Takes an direction in radians and returns the direction in degrees.
+    ****************************************************************************/
    static double convertToDegrees(double radians)
    {
       return radians * 180 / M_PI; //3.14159265358979323846
    }
    
-   // Convert to Radians
+   /****************************************************************************
+    * Convert To Radians:
+    *    Takes an direction in degrees and returns the direction in radians.
+    ****************************************************************************/
    static double convertToRadians(double degrees)
    {
       return degrees * M_PI / 180;

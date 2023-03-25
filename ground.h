@@ -10,7 +10,6 @@
 #pragma once
 
 #include "position.h"   // for Point
-#include "uiDraw.h"
 
 // forward declaration for the Ground unit tests
 class TestGround;
@@ -32,8 +31,6 @@ public:
    // reset the game
    void reset(Position & posHowitzer);
 
-   // draw the ground on the screen
-   void draw(ogstream & gout) const;
 
    // determine how high the Point is off the ground
    double getElevationMeters(const Position & pos) const;

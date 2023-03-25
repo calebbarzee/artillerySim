@@ -8,11 +8,12 @@
  ***************************************************************************/
 
 #pragma once
+
 #include "velocity.h"
+#include "acceleration.h"
 #include <cassert>
 #include <iostream>
 #include <math.h>
-#include "acceleration.h"
 
 using namespace std;
 
@@ -39,7 +40,7 @@ using namespace std;
   *  - testAddVelocity(): tests the addVelocity() method
   ***************************************************************************/
 
- class testVelocity
+ class TestVelocity
 {
 public:
    void run()
@@ -62,171 +63,149 @@ public:
    }
 
 private:
+   bool closeEnough(double value, double test, double tolerance) 
+   {
+      double difference = value - test;
+      return (difference >= -tolerance) && (difference <= tolerance);
+   }
   void testDefaultConstructor()
   {
     //setup
-    cout << "Testing default constructor... ";
     //exercise
     Velocity v;
     //verify
-    assert(v.getDx() == 0);
-    assert(v.getDy() == 0);
+    assert(v.dx == 0);
+    assert(v.dy == 0);
     //teardown
-    cout << "Passed" << endl;
   }
   void testNonDefaultConstructor()
   {
     //setup
-    cout << "Testing non-default constructor... ";
     //exercise
     Velocity v(1, 2);
     //verify
-    assert(v.getDx() == 1);
-    assert(v.getDy() == 2);
+    assert(v.dx == 1);
+    assert(v.dy == 2);
     //teardown
-    cout << "Passed" << endl;
   }
   void testCopyConstructor()
   {
     //setup
-    cout << "Testing copy constructor... ";
-    //exercise
     Velocity v(1, 2);
+    //exercise
     Velocity v2(v);
     //verify
-    assert(v2.getDx() == 1);
-    assert(v2.getDy() == 2);
+    assert(v2.dx == 1);
+    assert(v2.dy == 2);
     //teardown
-    cout << "Passed" << endl;
   }
   void testGetDx()
   {
     //setup
-    cout << "Testing getDx()... ";
-    //exercise
     Velocity v(1, 2);
+    //exercise
     //verify
     assert(v.getDx() == 1);
     //teardown
-    cout << "Passed" << endl;
   }
   void testGetDy()
   {
     //setup
-    cout << "Testing getDy()... ";
-    //exercise
     Velocity v(1, 2);
+    //exercise
     //verify
     assert(v.getDy() == 2);
     //teardown
-    cout << "Passed" << endl;
   }
   void testGetSpeed()
   {
     //setup
-    cout << "Testing getSpeed()... ";
-    //exercise
     Velocity v(3, 4);
+    //exercise
     //verify
     assert(v.getSpeed() == 5);
     //teardown
-    cout << "Passed" << endl;
   }
   void testGetAngle()
   {
     //setup
-    cout << "Testing getAngle()... ";
-    //exercise
     Velocity v(3, 4);
+    //exercise
     //verify
-    assert(v.getAngle() == 0.9272952180016122);
+    assert(closeEnough(v.getAngle(), -0.64350110879, 0.0001));
     //teardown
-    cout << "Passed" << endl;
   }
   void testGetReverseAngle()
   {
     //setup
-    cout << "Testing getReverseAngle()... ";
-    //exercise
     Velocity v(3, 4);
+    //exercise
     //verify
-    assert(v.getReverseAngle() == 2.214297435588181);
+    assert(closeEnough(v.getReverseAngle(), 2.4980916535, 0.0001));
     //teardown
-    cout << "Passed" << endl;
   }
   void testSetDx()
   {
     //setup
-    cout << "Testing setDx()... ";
-    //exercise
     Velocity v(3, 4);
+    //exercise
     v.setDx(5);
     //verify
-    assert(v.getDx() == 5);
+    assert(v.dx == 5);
     //teardown
-    cout << "Passed" << endl;
   }
   void testSetDy()
   {
     //setup
-    cout << "Testing setDy()... ";
-    //exercise
     Velocity v(3, 4);
+    //exercise
     v.setDy(5);
     //verify
-    assert(v.getDy() == 5);
+    assert(v.dy == 5);
     //teardown
-    cout << "Passed" << endl;
   }
   void testSetSpeedVector()
   {
     //setup
-    cout << "Testing setSpeedVector()... ";
-    //exercise
     Velocity v(3, 4);
+    //exercise
     v.setSpeedVector(100, 0); //takes a speed and an angle
     //verify
-    assert(v.getDx() == 0);
-    assert(v.getDy() == 100);
+    assert(v.dx == 0);
+    assert(v.dy == 100);
 
 
     //exercise
     v.setSpeedVector(100, M_PI); //takes a speed and an angle
     //verify
-    assert(v.getDx() == 0);
-    assert(v.getDy() == -100);
+    assert(closeEnough(v.dx, 0.0, 0.0001));
+    assert(v.dy == -100);
 
     //teardown
-    cout << "Passed" << endl;
   }
   void testCalcDx()
   {
     //setup
-    cout << "Testing calcDx()... ";
     Velocity v;
     //exercise
     double dx = v.calcDx(20, M_PI / 2);
     //verify
-    assert(dx == 20);
+    assert(closeEnough(dx, 20, 0.0001));
     //teardown
-    cout << "Passed" << endl;
   }
   void testCalcDy()
   {
     //setup
-    cout << "Testing calcDy()... ";
     Velocity v;
     //exercise
     double dy = v.calcDy(20, M_PI);
     //verify
-    assert(dy == -20);
+    assert(closeEnough(dy, -20, 0.0001));
     //teardown
-    cout << "Passed" << endl;
   }
   void testAddAcceleration()
   {
     //setup
-    cout << "Testing addAcceleration()... ";
     Velocity v;
     Acceleration a;
     //exercise
@@ -238,23 +217,20 @@ private:
     //exercise
     v.addAcceleration(a, 1);
     //verify
-    assert(v.getDx() == 0);
-    assert(v.getDy() == 0);
+    assert(v.dx == 0);
+    assert(v.dy == 0);
     //teardown
-    cout << "Passed" << endl;
   }
   void testAddVelocity()
   {
     //setup
-    cout << "Testing addVelocity()... ";
-    //exercise
     Velocity v(3, 4);
     Velocity v2(5, 6);
+    //exercise
     v.addVelocity(v2);
     //verify
-    assert(v.getDx() == 8);
-    assert(v.getDy() == 10);
+    assert(closeEnough(v.dx, 8, 0.0001));
+    assert(closeEnough(v.dy, 10, 0.0001));
     //teardown
-    cout << "Passed" << endl;
   }
 };

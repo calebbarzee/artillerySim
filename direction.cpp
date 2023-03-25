@@ -1,15 +1,16 @@
 
 #include "direction.h"
 
-/****************************************************************************
- * Normalize
- * Takes an angle in radians and constrains it to range [0, 2pi)
- ****************************************************************************/
-double Direction :: normalize(double angle)
+   /****************************************************************************
+    * Normalize:
+    *    Takes an direction in radians and constrains it to range (-PI, PI]
+    ****************************************************************************/
+
+double Direction :: normalize(double radians)
 {
-   angle = fmod(angle, 2 * M_PI);
-   if (angle < 0)
-      return angle + 2 * M_PI;
-   else
-      return angle;
+   while (radians <= -M_PI)
+      radians += 2*M_PI;
+   while (radians > M_PI)
+      radians -= 2*M_PI;
+   return radians;
 }

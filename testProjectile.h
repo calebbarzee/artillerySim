@@ -7,13 +7,11 @@
  *    All the unit tests for the Projectile class
  ************************************************************************/
 
-
 #pragma once
 
 #include "projectile.h"
 #include <cassert>
 #include <vector>
-
 
 using namespace std;
 
@@ -21,28 +19,267 @@ using namespace std;
  * TEST Projectile
  * A friend class for projectile which contains the projectile unit tests
  ********************************/
-class TestProjectile
-{
+class TestProjectile {
 public:
-   void run()
-   {
-      constructor();
-
-
-   }
+  void run() {
+    test_default_constructor();
+    test_reset_empty();
+    test_reset_full();
+    test_fire_right();
+    test_fire_left();
+    test_fire_up();
+    test_advance_nothing();
+    test_advance_fall();
+    test_advance_up();
+    test_advance_diagonal();
+  }
 
 private:
+  double metersFromPixels = -1.0;
 
-   // Test the default constructor
-   void constructor()
-   {  // setup
+  bool closeEnough(double value, double test, double tolerance) {
+    double difference = value - test;
+    return (difference >= -tolerance) && (difference <= tolerance);
+  }
 
-      // exercise
-      
-      // verify
-      assert();
-      // teardown
-   }  
-   // when the shell is out of range
-  
+  void test_default_constructor() {
+    // setup
+    // exercise
+    Projectile projectile;
+    // verify
+    assert(projectile.velocity.dx == 0.0);
+    assert(projectile.velocity.dy == 0.0);
+    assert(projectile.mass == 46.7);
+    assert(projectile.radius == 0.077545);
+    assert(projectile.area == 0.018842);
+    assert(projectile.flightPath.empty() == true);
+    // teardown
+  }
+
+  void test_reset_empty() {
+    // setup
+    Projectile projectile;
+    // exercise
+    projectile.reset();
+    // verify
+    assert(projectile.velocity.dx == 0.0);
+    assert(projectile.velocity.dy == 0.0);
+    assert(projectile.mass == 46.7);
+    assert(projectile.radius == 0.077545);
+    assert(projectile.area == 0.018842);
+    assert(projectile.flightPath.empty() == true);
+    // teardown
+  }
+
+  void test_reset_full() {
+    // setup
+    Projectile projectile;
+    PVT pvt;
+    projectile.flightPath.push_back(pvt);
+    projectile.flightPath.push_back(pvt);
+    projectile.flightPath.push_back(pvt);
+    assert(projectile.flightPath.size() == 3);
+    // exercise
+    projectile.reset();
+    // verify
+    assert(projectile.velocity.dx == 0.0);
+    assert(projectile.velocity.dy == 0.0);
+    assert(projectile.mass == 46.7);
+    assert(projectile.radius == 0.077545);
+    assert(projectile.area == 0.018842);
+    assert(projectile.flightPath.empty() == true);
+    // teardown
+  }
+
+  void test_fire_right() {
+    // setup
+    setupStandardFixture();
+    Projectile projectile;
+    Position position;
+    position.x = 111.0;
+    position.y = 222.0;
+    double time = 1.0;
+    Direction direction;
+    direction.radians = M_PI / 2.0;
+    double muzzleVelocity = 100.0;
+    // exercise
+    projectile.fire(position, time, direction, muzzleVelocity);
+    // verify
+    assert(projectile.mass == 46.7);
+    assert(projectile.radius == 0.077545);
+    assert(projectile.area == 0.018842);
+    assert(projectile.flightPath.size() == 1);
+    assert(projectile.flightPath.front().position.x == 111.0);
+    assert(projectile.flightPath.front().position.y == 222.0);
+    assert(projectile.flightPath.front().time == 1.0);
+    assert(projectile.flightPath.front().velocity.getSpeed() == 100.0);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void test_fire_left()
+  {
+    // setup
+    setupStandardFixture();
+    Projectile p;
+    Position pos;
+    pos.x = 111.0;
+    pos.y = 222.0;
+    double time = 1.0;
+    Direction direction;
+    direction.radians = M_PI * 3.0 / 2.0; // 270 degrees or to the left
+    double muzzleVelocity(100.0);
+    // exercise
+    p.fire(pos, time, direction, muzzleVelocity);
+    // verify
+    assert(p.mass == 46.7);
+    assert(p.radius == 0.077545);
+    assert(p.flightPath.size() == 1);
+    assert(p.flightPath.front().position.x == 111.0);
+    assert(p.flightPath.front().position.y == 222.0);
+    assert(closeEnough(-100.0, p.flightPath.front().velocity.dx, 0.01));
+    assert(closeEnough( 0.0, p.flightPath.front().velocity.dy, 0.01));
+    assert(p.flightPath.front().time == 1.0);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void test_fire_up()
+  {
+    // setup
+    setupStandardFixture();
+    Projectile p;
+    Position pos;
+    pos.x = 111.0;
+    pos.y = 222.0;
+    double time = 1.0;
+    Direction d;
+    d.radians = 0.0;
+    double muzzleVelocity(100.0);
+    // exercise
+    p.fire(pos, time, d, muzzleVelocity);
+    // verify
+    assert(p.mass == 46.7);
+    assert(p.radius == 0.077545);
+    assert(p.flightPath.size() == 1);
+    assert(p.flightPath.front().position.x == 111.0);
+    assert(p.flightPath.front().position.y == 222.0);
+    assert(closeEnough(0.0, p.flightPath.front().velocity.dx, 0.01));
+    assert(closeEnough(100.0, p.flightPath.front().velocity.dy, 0.01));
+    assert(p.flightPath.front().time == 1.0);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void test_advance_nothing()
+  {
+    // setup
+    setupStandardFixture();
+    Projectile p;
+    // exercise
+    p.advance(1.0);
+    // verify
+    assert(p.mass == 46.7);
+    assert(p.radius == 0.077545);
+    assert(p.flightPath.empty() == true);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void test_advance_fall()
+  {
+    // setup
+    setupStandardFixture();
+    Projectile p;
+    Position pos;
+    PVT pvt;
+    pvt.position.x = 100.0;
+    pvt.position.y = 200.0;
+    pvt.velocity.setDx(0.0);
+    pvt.velocity.setDy(0.0);
+    pvt.time = 100.0;
+    p.flightPath.push_back(pvt);
+    // exercise
+    p.advance(101.0);
+    // verify
+    assert(p.mass == 46.7);
+    assert(p.radius == 0.077545);
+    assert(p.flightPath.size() == 2);
+    assert(closeEnough(100.0, p.flightPath.front().position.x, 0.01));
+    assert(closeEnough(190.19, p.flightPath.front().position.y, 0.01));
+    assert(closeEnough(0.0, p.flightPath.front().velocity.dx, 0.01));
+    assert(closeEnough(-9.81, p.flightPath.front().velocity.dy, 0.01));
+    assert(p.flightPath.back().time == 101.0);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void test_advance_up()
+  {
+    // setup
+    setupStandardFixture();
+    Projectile p;
+    Position pos;
+    PVT pvt;
+    pvt.position.x = 100.0;
+    pvt.position.y = 200.0;
+    pvt.velocity.setDx(0.0);
+    pvt.velocity.setDy(100.0);
+    pvt.time = 100.0;
+    p.flightPath.push_back(pvt);
+    // exercise
+    p.advance(101.0);
+    // verify
+    assert(p.mass == 46.7);
+    assert(p.radius == 0.077545);
+    assert(p.flightPath.size() == 2);
+    assert(closeEnough(100.0, p.flightPath.front().position.x, 0.01));
+    assert(closeEnough(289.80, p.flightPath.front().position.y, 0.01));
+    assert(closeEnough(0.0, p.flightPath.front().velocity.dx, 0.01));
+    assert(closeEnough(89.80, p.flightPath.front().velocity.dy, 0.01));
+    assert(p.flightPath.back().time == 101.0);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void test_advance_diagonal()
+  {
+    // setup
+    setupStandardFixture();
+    Projectile p;
+    Position pos;
+    PVT pvt;
+    pvt.position.x = 100.0;
+    pvt.position.y = 200.0;
+    pvt.velocity.setDx(50.0);
+    pvt.velocity.setDy(40.0);
+    pvt.time = 100.0;
+    p.flightPath.push_back(pvt);
+    // exercise
+    p.advance(101.0);
+    // verify
+    assert(p.mass == 46.7);
+    assert(p.radius == 0.077545);
+    assert(p.flightPath.size() == 2);
+    assert(closeEnough(150.0, p.flightPath.front().position.x, 0.01));
+    assert(closeEnough(230.1, p.flightPath.front().position.y, 0.01));
+    assert(closeEnough(50.0, p.flightPath.front().velocity.dx, 0.01));
+    assert(closeEnough(30.1, p.flightPath.front().velocity.dy, 0.01));
+    assert(p.flightPath.back().time == 101.0);
+    // teardown
+    teardownStandardFixture();
+  }
+
+  void setupStandardFixture()
+   {
+      Position pos;
+      metersFromPixels = pos.metersFromPixels;
+      pos.metersFromPixels = 1.0;
+   }
+   void teardownStandardFixture()
+   {
+      assert(metersFromPixels != -1.0);
+      Position pos;
+      pos.metersFromPixels = metersFromPixels;
+   }
 };

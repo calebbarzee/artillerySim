@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include "position.h"
+#include "velocity.h"
+#include "acceleration.h"
 #include <cassert>
 
 using namespace std;
@@ -43,14 +45,21 @@ public:
 
       test_setZoom();
       test_getZoom();
+
+      test_add_stationary();
+      test_add_moving();
+      test_add_moving_longer();
+      test_add_from_stop();
+      test_add_from_stop_longer();
+      test_add_complex();
    }
 
 private:
    // utility function because floating point numbers are approximations
-   bool closeEnough(double value, double test, double tolerence) 
+   bool closeEnough(double value, double test, double tolerance) 
    {
       double difference = value - test;
-      return (difference >= -tolerence) && (difference <= tolerence);
+      return (difference >= -tolerance) && (difference <= tolerance);
    }
 
    // default constructor
@@ -398,5 +407,120 @@ private:
       assert(zoom == 123.4);
       // teardown
       Position::metersFromPixels = metersFromPixels;
+   }
+
+   // updates position while stationary
+   void test_add_stationary()
+   {
+      // setup
+      Position pos;
+      Velocity vel;
+      Acceleration acc;
+      double time(1.0);
+      pos.x = 11.1;
+      pos.y = 22.2;
+      // exercise
+      pos.add(vel, acc, time);
+      // verify
+      assert(closeEnough(pos.x, 11.1, 0.001));
+      assert(closeEnough(pos.y, 22.2, 0.001));
+      // teardown
+   }
+   // updates position while moving
+   void test_add_moving()
+   {
+      // setup
+      Position pos;
+      Velocity vel;
+      vel.setDx(0.5);
+      vel.setDy(0.4);
+      Acceleration acc;
+      double time(1.0);
+      pos.x = 11.1;
+      pos.y = 22.2;
+      // exercise
+      pos.add(vel, acc, time);
+      // verify
+      assert(closeEnough(pos.x, 11.6, 0.001));
+      assert(closeEnough(pos.y, 22.6, 0.001));
+      // teardown
+   }
+   // updates position while moving longer
+   void test_add_moving_longer()
+   {
+      // setup
+      Position pos;
+      Velocity vel;
+      vel.setDx(0.5);
+      vel.setDy(0.4);
+      Acceleration acc;
+      double time(2.0);
+      pos.x = 11.1;
+      pos.y = 22.2;
+      // exercise
+      pos.add(vel, acc, time);
+      // verify
+      assert(closeEnough(pos.x, 12.1, 0.001));
+      assert(closeEnough(pos.y, 23.0, 0.001)); // 23.4??
+      // teardown
+   }
+   // updates position while accelerating from stop
+   void test_add_from_stop()
+   {
+      // setup
+      Position pos;
+      Velocity vel;
+      Acceleration acc;
+      acc.setDdx(0.2);
+      acc.setDdy(0.3);
+      double time(1.0);
+      pos.x = 11.1;
+      pos.y = 22.2;
+      // exercise
+      pos.add(vel, acc, time);
+      // verify
+      assert(closeEnough(pos.x, 11.20, 0.001)); // 11.3??
+      assert(closeEnough(pos.y, 22.35, 0.001)); // 22.5??
+      // teardown
+   }
+   // updates position while accelerating from stop longer
+   void test_add_from_stop_longer()
+   {
+      // setup
+      Position pos;
+      Velocity vel;
+      Acceleration acc;
+      acc.setDdx(0.2);
+      acc.setDdy(0.3);
+      double time(2.0);
+      pos.x = 11.1;
+      pos.y = 22.2;
+      // exercise
+      pos.add(vel, acc, time);
+      // verify
+      assert(closeEnough(pos.x, 11.50, 0.001)); // 11.6??
+      assert(closeEnough(pos.y, 22.8, 0.001)); // 23.0??
+      // teardown
+   }
+   // updates position while accelerating from moving
+   void test_add_complex()
+   {
+      // setup
+      Position pos;
+      Velocity vel;
+      vel.setDx(0.5);
+      vel.setDy(0.4);
+      Acceleration acc;
+      acc.setDdx(0.2);
+      acc.setDdy(0.3);
+      double time(2.0);
+      pos.x = 11.1;
+      pos.y = 22.2;
+      // exercise
+      pos.add(vel, acc, time);
+      // verify
+      assert(closeEnough(pos.x, 12.5, 0.001));
+      assert(closeEnough(pos.y, 23.6, 0.001)); 
+      // teardown
    }
 };

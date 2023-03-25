@@ -59,316 +59,306 @@ class TestDirection
       testReverse();
    }
   private:
+   bool closeEnough(double value, double test, double tolerance)
+   {
+      double difference = value - test;
+      return (difference >= -tolerance) && (difference <= tolerance);
+   }
     void testDefaultConstructor() 
     {
       //setup
-      cout << "Testing default constructor... ";
       //exercise
       Direction d;
       //verify
-      assert(d.aRadians == 0.0);
+      assert(d.radians == 0.0);
       assert(d.getRadians() == 0.0);
       assert(d.getDegrees() == 0.0);
       //teardown
-      cout << "Passed" << endl;
   }
   void testNonDefaultConstructor() 
   {
       //setup
-      cout << "Testing non-default constructor... ";
       //exercise
-      Direction d(1.0);
+      Direction d(180);
       //verify
-      assert(d.aRadians == 1.0);
-      assert(d.getRadians() == 1.0);
-      assert(d.getDegrees() == 57.295779513082320876798154814105);
+      assert(d.radians == M_PI);
+      assert(d.getRadians() == M_PI);
+      assert(d.getDegrees() == 180.0);
 
       //exercise
-      Direction d2(-1 * M_PI);
+      Direction d2(-180);
       //verify
-      assert(d2.aRadians == M_PI);
+      assert(d2.radians == M_PI);
       assert(d2.getRadians() == M_PI);
       assert(d2.getDegrees() == 180.0);
       //teardown
-      cout << "Passed" << endl;
   }
   void testCopyConstructor() 
   {
-      //setup
-      cout << "Testing copy constructor... ";
-      //exercise
-      Direction d(1.0);
-      Direction d2(d);
-      //verify
-      assert(d2.getRadians() == 1.0);
-      assert(d2.getDegrees() == 57.295779513082320876798154814105);
+     //setup
+     //exercise
+     Direction d(180);
+     Direction d2(d);
+     //verify
+     assert(d2.getRadians() == M_PI);
+     assert(d2.getDegrees() == 180.0);
 
       //exercise
-      Direction d3(-1 * M_PI);
+      Direction d3(-540);
       Direction d4(d3);
       //verify
-      assert(d4.aRadians == M_PI);
+      assert(d4.radians == M_PI);
       assert(d4.getRadians() == M_PI);
       assert(d4.getDegrees() == 180.0);
       //teardown
-      cout << "Passed" << endl;
   }
   void testGetRadians() 
   {
-      //setup
-      cout << "Testing getRadians()... ";
-      Direction d(1.0);
-      //exercise
-      double radians = d.getRadians();
-      //verify
-      assert(radians == 1.0);
+     //setup
+     Direction d;
+     d.radians = 1.0;
+     //exercise
+     double radians = d.getRadians();
+     //verify
+     assert(radians == 1.0);
 
-      //setup
-      d.aRadians = 2.0;
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == 2.0);
+     //setup
+     d.radians = 2.0;
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == 2.0);
 
-      //setup
-      d.aRadians = 6.0;
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == 6.0);
-
-      //setup
-      d.aRadians = -1.0;
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == -1.0);
-
-      //setup
-      d.aRadians = -2.0;
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == -2.0);
-
-      //setup
-      d.aRadians = -6.0;
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == -6.0);
-
-      //setup
-      d.aRadians = 0.0;
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == 0.0);
-
-      //setup
-      d.aRadians = numeric_limits<double>::min();
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == numeric_limits<double>::min());
-
-      //setup
-      d.aRadians = numeric_limits<double>::max();
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == numeric_limits<double>::max());
-
-      //setup
-      d.aRadians = -1 * numeric_limits<double>::min();
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == -1 * numeric_limits<double>::min());
-
-      //setup
-      d.aRadians = -1 * numeric_limits<double>::max();
-      //exercise
-      radians = d.getRadians();
-      //verify
-      assert(radians == -1 * numeric_limits<double>::max());
-
-      //teardown
-      cout << "Passed" << endl;
+     //setup
+     d.radians = 6.0;
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == 6.0);
+     
+     //setup
+     d.radians = -1.0;
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == -1.0);
+     
+     //setup
+     d.radians = -2.0;
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == -2.0);
+     
+     //setup
+     d.radians = -6.0;
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == -6.0);
+     
+     //setup
+     d.radians = 0.0;
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == 0.0);
+     
+     //setup
+     d.radians = numeric_limits<double>::min();
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == numeric_limits<double>::min());
+     
+     //setup
+     d.radians = numeric_limits<double>::max();
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == numeric_limits<double>::max());
+     
+     //setup
+     d.radians = -1 * numeric_limits<double>::min();
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == -1 * numeric_limits<double>::min());
+     
+     //setup
+     d.radians = -1 * numeric_limits<double>::max();
+     //exercise
+     radians = d.getRadians();
+     //verify
+     assert(radians == -1 * numeric_limits<double>::max());
+     
+     //teardown
   }
   void testGetDegrees() 
   {
-      //setup
-      cout << "Testing getDegrees()... ";
-      Direction d(1.0);
-      //exercise
-      double degrees = d.getDegrees();
-      //verify
-      assert(degrees == 57.295779513082320876798154814105);
-      //teardown
+     //setup
+     Direction d;
+     d.radians = 1.0;
+     //exercise
+     double degrees = d.getDegrees();
+     //verify
+     assert(degrees == 57.295779513082320876798154814105);
+     //teardown
 
-      //setup
-      d.aRadians = 2.0;
-      //exercise
-      degrees = d.getDegrees();
-      //verify
-      assert(degrees == 114.59155902616464175359630962821);
-
-      //setup
-      d.aRadians = 6.0;
-      //exercise
-      degrees = d.getDegrees();
-      //verify
-      assert(degrees == 343.77515707849392526078892888463);
-
-      //setup
-      d.aRadians = -1.0;
-      //exercise
-      degrees = d.getDegrees();
-      //verify
-      assert(degrees == -57.295779513082320876798154814105);
-
-      //setup
-      d.aRadians = -2.0;
-      //exercise
-      degrees = d.getDegrees();
-      //verify
-      assert(degrees == -114.59155902616464175359630962821);
-
-      //setup
-      d.aRadians = -6.0;
-      //exercise
-      degrees = d.getDegrees();
-      //verify
-      assert(degrees == -343.77515707849392526078892888463);
-
-      //teardown
-      cout << "Passed" << endl;
+     //setup
+     d.radians = 2.0;
+     //exercise
+     degrees = d.getDegrees();
+     //verify
+     assert(degrees == 114.59155902616464175359630962821);
+     
+     //setup
+     d.radians = 6.0;
+     //exercise
+     degrees = d.getDegrees();
+     //verify
+     assert(closeEnough(degrees, 343.7746770784939, 0.0001));
+     
+     //setup
+     d.radians = -1.0;
+     //exercise
+     degrees = d.getDegrees();
+     //verify
+     assert(degrees == -57.295779513082320876798154814105);
+     
+     //setup
+     d.radians = -2.0;
+     //exercise
+     degrees = d.getDegrees();
+     //verify
+     assert(degrees == -114.59155902616464175359630962821);
+     
+     //setup
+     d.radians = -6.0;
+     //exercise
+     degrees = d.getDegrees();
+     //verify
+     assert(closeEnough(degrees, -343.7746770784939, 0.0001));
+     
+     //teardown
   }
-  void testSetRadians() 
-  {
+   void testSetRadians()
+   {
       //setup
-      cout << "Testing setRadians()... ";
       Direction d;
       //exercise
       d.setRadians(1.0);
       //verify
-      assert(d.aRadians == 1.0);
+      assert(d.radians == 1.0);
       assert(d.getRadians() == 1.0);
       assert(d.getDegrees() == 57.295779513082320876798154814105);
-
+      
       //exercise
       d.setRadians(2.0);
       //verify
-      assert(d.aRadians == 2.0);
+      assert(d.radians == 2.0);
       assert(d.getRadians() == 2.0);
       assert(d.getDegrees() == 114.59155902616464175359630962821);
-
+      
       //exercise
       d.setRadians(0.0);
       //verify
-      assert(d.aRadians == 0.0);
+      assert(d.radians == 0.0);
       assert(d.getRadians() == 0.0);
       assert(d.getDegrees() == 0.0);
-
+      
       //exercise
       d.setRadians(3 * M_PI);
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
-
+      
       //exercise
       d.setRadians(-1 * M_PI);
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
-
+      
       //teardown
-      cout << "Passed" << endl;
   }
   void testSetDegrees() 
   {
       //setup
-      cout << "Testing setDegrees()... ";
       Direction d;
       //exercise
       d.setDegrees(57.295779513082320876798154814105);
       //verify
-      assert(d.aRadians == 1.0);
+      assert(d.radians == 1.0);
       assert(d.getRadians() == 1.0);
       assert(d.getDegrees() == 57.295779513082320876798154814105);
 
       //exercise
       d.setDegrees(114.59155902616464175359630962821);
       //verify
-      assert(d.aRadians == 2.0);
+      assert(d.radians == 2.0);
       assert(d.getRadians() == 2.0);
       assert(d.getDegrees() == 114.59155902616464175359630962821);
 
       //exercise
       d.setDegrees(0.0);
       //verify
-      assert(d.aRadians == 0.0);
+      assert(d.radians == 0.0);
       assert(d.getRadians() == 0.0);
       assert(d.getDegrees() == 0.0);
 
       //exercise
       d.setDegrees(180.0);
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
 
       //exercise
       d.setDegrees(-180.0);
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
 
       //teardown
-      cout << "Passed" << endl;
   }
   void testNormalize()
   {
       //setup
-      cout << "Testing normalize()... ";
       Direction d;
       //exercise
-      double aRadians = d.normalize(1.0);
+      double radians = d.normalize(1.0);
       //verify
-      assert(aRadians == 1.0);
+      assert(radians == 1.0);
 
       //exercise
-      aRadians = d.normalize(2.0);
+      radians = d.normalize(2.0);
       //verify
-      assert(aRadians == 2.0);
+      assert(radians == 2.0);
 
       //exercise
-      aRadians = d.normalize(0.0);
+      radians = d.normalize(0.0);
       //verify
-      assert(aRadians == 0.0);
+      assert(radians == 0.0);
 
       //exercise
-      aRadians = d.normalize(3 * M_PI);
+      radians = d.normalize(3 * M_PI);
       //verify
-      assert(aRadians == M_PI);
+      assert(radians == M_PI);
 
       //exercise
-      aRadians = d.normalize(-1 * M_PI);
+      radians = d.normalize(-1 * M_PI);
       //verify
-      assert(aRadians == M_PI);
+      assert(radians == M_PI);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testConvertToDegrees()
   {
       //setup
-      cout << "Testing convertToDegrees()... ";
       Direction d;
       //exercise
       double degrees = d.convertToDegrees(1.0);
@@ -388,21 +378,19 @@ class TestDirection
       //exercise
       degrees = d.convertToDegrees(3 * M_PI);
       //verify
-      assert(degrees == 180.0);
+      assert(degrees == 540.0);
 
       //exercise
       degrees = d.convertToDegrees(-1 * M_PI);
       //verify
-      assert(degrees == 180.0);
+      assert(degrees == -180.0);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testConvertToRadians()
   {
       //setup
-      cout << "Testing convertToRadians()... ";
       Direction d;
       //exercise
       double radians = d.convertToRadians(57.295779513082320876798154814105);
@@ -427,118 +415,107 @@ class TestDirection
       //exercise
       radians = d.convertToRadians(-180.0);
       //verify
-      assert(radians == M_PI);
+      assert(radians == -M_PI);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testSetDown()
   {
       //setup
-      cout << "Testing setDown()... ";
       Direction d;
       //exercise
       d.setDown();
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testSetLeft()
   {
       //setup
-      cout << "Testing setLeft()... ";
       Direction d;
       //exercise
       d.setLeft();
       //verify
-      assert(d.aRadians == 3 * M_PI / 2);
-      assert(d.getRadians() == 3 * M_PI / 2);
-      assert(d.getDegrees() == 270.0);
+      assert(d.radians == -M_PI_2);
+      assert(d.getRadians() == -M_PI_2);
+      assert(d.getDegrees() == -90.0);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testSetRight()
   {
       //setup
-      cout << "Testing setRight()... ";
       Direction d;
       //exercise
       d.setRight();
       //verify
-      assert(d.aRadians == M_PI / 2);
+      assert(d.radians == M_PI / 2);
       assert(d.getRadians() == M_PI / 2);
       assert(d.getDegrees() == 90.0);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testSetUp()
   {
       //setup
-      cout << "Testing setUp()... ";
       Direction d;
       //exercise
       d.setUp();
       //verify
-      assert(d.aRadians == 0.0);
+      assert(d.radians == 0.0);
       assert(d.getRadians() == 0.0);
       assert(d.getDegrees() == 0.0);
 
       //teardown
-      cout << "Passed" << endl;
   }
 
   void testReverse()
   {
       //setup
-      cout << "Testing reverse()... ";
       Direction d;
       //exercise
       d.reverse();
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
 
       //exercise
       d.reverse();
       //verify
-      assert(d.aRadians == 0.0);
+      assert(d.radians == 0.0);
       assert(d.getRadians() == 0.0);
       assert(d.getDegrees() == 0.0);
 
       //exercise
       d.reverse();
       //verify
-      assert(d.aRadians == M_PI);
+      assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
 
       //setup
-      d.aRadians = M_PI / 2;
+      d.radians = M_PI_2;
       //exercise
       d.reverse();
       //verify
-      assert(d.aRadians == 3 * M_PI / 2);
-      assert(d.getRadians() == 3 * M_PI / 2);
-      assert(d.getDegrees() == 270.0);
+      assert(d.radians == -M_PI_2);
+      assert(d.getRadians() == -M_PI_2);
+      assert(d.getDegrees() == -90.0);
 
       //exercise
       d.reverse();
       //verify
-      assert(d.aRadians == M_PI / 2);
-      assert(d.getRadians() == M_PI / 2);
+      assert(d.radians == M_PI_2);
+      assert(d.getRadians() == M_PI_2);
       assert(d.getDegrees() == 90.0);
       //teardown
-      cout << "Passed" << endl;
   }
 };

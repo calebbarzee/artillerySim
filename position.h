@@ -12,9 +12,13 @@
 #pragma once
 
 #include <iostream>
+#include "acceleration.h"
+#include "velocity.h"
 
 class TestPosition;
 class TestGround;
+class TestArtillery;
+class TestProjectile;
 
 /*********************************************
  * Position
@@ -24,6 +28,14 @@ class Position
 {
    friend TestPosition;
    friend TestGround;
+   friend TestArtillery;
+   friend TestProjectile;
+
+private:
+   double x;                 // horizontal position
+   double y;                 // vertical position
+   static double metersFromPixels;
+   
 public:
    
    // constructors
@@ -55,10 +67,7 @@ public:
    }
    double getZoom() const { return metersFromPixels; }
 
-private:
-   double x;                 // horizontal position
-   double y;                 // vertical position
-   static double metersFromPixels;
+   void add(const Velocity & velocity, const Acceleration & acceleration, const double t);
 };
 
 // stream I/O useful for debugging

@@ -14,6 +14,7 @@
 using namespace std;
 
 class TestVelocity;
+class TestProjectile;
 /****************************************************************************
   * Class: VELOCITY
   * Attributes: 
@@ -40,8 +41,9 @@ class Velocity
 {
 public:
    friend class TestVelocity;
+   friend class TestProjectile;
    // Constructor
-   Velocity() {};
+   Velocity() : dx(0.0), dy(0.0) {};
    Velocity(double dx, double dy) : dx(dx), dy(dy) {};
    Velocity(const Velocity & rhs) : dx(rhs.dx), dy(rhs.dy) {};
 

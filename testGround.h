@@ -35,8 +35,6 @@ public:
 
       test_getTarget_two();
       test_getTarget_seven();
-
-      test_draw();
    }
 
 private:
@@ -167,95 +165,7 @@ private:
       verifyStandardFixture(g);
       // teardown
       teardownStandardFixture(g);
-   }  
-
-   // Spy to see exactly what ogstream::draw*() methods are called... and how.
-   class ogstreamSpy : public ogstreamDummy
-   {
-   public:
-      // ignore lines
-      void drawLine(const Position& begin, const Position& end,
-         double red, double green, double blue) { }
-      // ignore text
-      void drawText(const Position& topLeft, const char* text) { }
-      // flush is a no-op
-      void flush() { }
-      // remember target
-      void drawTarget(const Position& pos)
-      {
-         targets.push_back(pos);
-      }
-      // remember rectangles
-      void drawRectangle(const Position& begin, const Position& end,
-         double red, double green, double blue)
-      {
-         rectanglesBegin.push_back(begin);
-         rectanglesEnd.push_back(end);
-      }
-      vector <Position>  targets;
-      vector <Position>  rectanglesBegin;
-      vector <Position>  rectanglesEnd;
-   };
-
-   // draw
-   void test_draw()
-   {  // setup
-      Position pos;
-      Ground g;
-      setupStandardFixture(g);
-      ogstreamSpy goutSpy;
-      // exercise
-      g.draw(goutSpy);
-      // verify
-      assert(goutSpy.targets.size() == 1);
-      assert(0.0 <= goutSpy.targets.front().x && goutSpy.targets.front().x < 11000.0);
-      assert(0.0 <= goutSpy.targets.front().y && goutSpy.targets.front().y < 11000.0);
-      assert(goutSpy.rectanglesBegin.size() == 10);
-      assert(goutSpy.rectanglesEnd.size() == 10);
-      assert(goutSpy.rectanglesBegin[0].x == 0.0);
-      assert(goutSpy.rectanglesBegin[1].x == 1100.0);
-      assert(goutSpy.rectanglesBegin[2].x == 2200.0);
-      assert(goutSpy.rectanglesBegin[3].x == 3300.0);
-      assert(goutSpy.rectanglesBegin[4].x == 4400.0);
-      assert(goutSpy.rectanglesBegin[5].x == 5500.0);
-      assert(goutSpy.rectanglesBegin[6].x == 6600.0);
-      assert(goutSpy.rectanglesBegin[7].x == 7700.0);
-      assert(goutSpy.rectanglesBegin[8].x == 8800.0);
-      assert(goutSpy.rectanglesBegin[9].x == 9900.0);
-      assert(goutSpy.rectanglesBegin[0].y == 0.0);
-      assert(goutSpy.rectanglesBegin[1].y == 0.0);
-      assert(goutSpy.rectanglesBegin[2].y == 0.0);
-      assert(goutSpy.rectanglesBegin[3].y == 0.0);
-      assert(goutSpy.rectanglesBegin[4].y == 0.0);
-      assert(goutSpy.rectanglesBegin[5].y == 0.0);
-      assert(goutSpy.rectanglesBegin[6].y == 0.0);
-      assert(goutSpy.rectanglesBegin[7].y == 0.0);
-      assert(goutSpy.rectanglesBegin[8].y == 0.0);
-      assert(goutSpy.rectanglesBegin[9].y == 0.0);
-      assert(goutSpy.rectanglesEnd[0].x == 1100.0);
-      assert(goutSpy.rectanglesEnd[1].x == 2200.0);
-      assert(goutSpy.rectanglesEnd[2].x == 3300.0);
-      assert(goutSpy.rectanglesEnd[3].x == 4400.0);
-      assert(goutSpy.rectanglesEnd[4].x == 5500.0);
-      assert(goutSpy.rectanglesEnd[5].x == 6600.0);
-      assert(goutSpy.rectanglesEnd[6].x == 7700.0);
-      assert(goutSpy.rectanglesEnd[7].x == 8800.0);
-      assert(goutSpy.rectanglesEnd[8].x == 9900.0);
-      assert(goutSpy.rectanglesEnd[9].x == 11000.0);
-      assert(goutSpy.rectanglesEnd[0].y == 9900.0);
-      assert(goutSpy.rectanglesEnd[1].y == 8800.0);
-      assert(goutSpy.rectanglesEnd[2].y == 7700.0);
-      assert(goutSpy.rectanglesEnd[3].y == 6600.0);
-      assert(goutSpy.rectanglesEnd[4].y == 5500.0);
-      assert(goutSpy.rectanglesEnd[5].y == 4400.0);
-      assert(goutSpy.rectanglesEnd[6].y == 3300.0);
-      assert(goutSpy.rectanglesEnd[7].y == 2200.0);
-      assert(goutSpy.rectanglesEnd[8].y == 1100.0);
-      assert(goutSpy.rectanglesEnd[9].y == 0.0);
-      verifyStandardFixture(g);
-      // teardown
-      teardownStandardFixture(g);
-   }  
+   }
 
 
    //
@@ -310,7 +220,7 @@ private:
    // standard fixture: teardown
    void teardownStandardFixture(Ground& g)
    {
-      assert(-1.0 != metersFromPixels);
+      assert(-1.0 != g.posUpperRight.metersFromPixels);
       g.posUpperRight.metersFromPixels = metersFromPixels;
    }
 };

@@ -12,9 +12,10 @@
 #include <iostream> 
 #include <cmath>
 #include <vector>
-#include "position.h"
+#include "acceleration.h"
 #include "velocity.h"
-#include "uiDraw.h"
+#include "direction.h"
+#include "position.h"
 
 using namespace std;
 /*********************************************
@@ -35,9 +36,15 @@ class TestProjectile;
 class Projectile
 {
   private:
-    double mass = 46.7; //kilograms
-    double area = 0.018842; //meters^2
+    constexpr static double mass = 46.7; //kilograms
+    constexpr static double radius = 0.077545; //meters
+    constexpr static double area = 0.018842; //meters^2
     vector<PVT> flightPath;
+    Velocity velocity;
+    Acceleration acceleration;
+    Position position;
+    Direction angle;
+    double time;
   public:
     //test class as friend
     friend TestProjectile;
@@ -47,19 +54,14 @@ class Projectile
 
     //calc methods
     void reset();
-    void fire(Position position, double time, double angle, double velocity);
+    void fire(Position position, double time, Direction angle, double muzzleVelocity);
     void advance(double time);
-    void draw(ogstream & gout) const;
 
     //getters
     double getAltitude() const {return flightPath.back().position.getMetersY();}
     Position getPosition() const {return flightPath.back().position;}
     double getFlightTime() const {return flightPath.back().time;}
     double getFlightDistance() const {return flightPath.back().position.getMetersX();}
-    double getSpeed() const {return flightPath.back().velocity;}
+    double getSpeed() const {return flightPath.back().velocity.getSpeed();}
     double getCurrentTime() const {return flightPath.back().time;} //unnecessary? same as flight time
-
-    //setters
-    double setMass(double mass) {this->mass = mass;}
-    double setArea(double area) {this->area = area;}
 };
