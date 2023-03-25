@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3FA320D629CFA0A2007299F8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA320D529CFA0A2007299F8 /* GLUT.framework */; };
+		3FA320D829CFA0AA007299F8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA320D729CFA0AA007299F8 /* OpenGL.framework */; };
+		3FA3214629CFA1BB007299F8 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3212D29CFA1B9007299F8 /* uiInteract.cpp */; };
+		3FA3214729CFA1BB007299F8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3212E29CFA1B9007299F8 /* main.cpp */; };
+		3FA3214829CFA1BB007299F8 /* projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213129CFA1B9007299F8 /* projectile.cpp */; };
+		3FA3214929CFA1BB007299F8 /* direction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213229CFA1B9007299F8 /* direction.cpp */; };
+		3FA3214A29CFA1BB007299F8 /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213829CFA1BA007299F8 /* physics.cpp */; };
+		3FA3214B29CFA1BB007299F8 /* artillery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213929CFA1BA007299F8 /* artillery.cpp */; };
+		3FA3214C29CFA1BB007299F8 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213C29CFA1BA007299F8 /* position.cpp */; };
+		3FA3214D29CFA1BB007299F8 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214029CFA1BA007299F8 /* test.cpp */; };
+		3FA3214E29CFA1BB007299F8 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214129CFA1BA007299F8 /* ground.cpp */; };
+		3FA3214F29CFA1BB007299F8 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214329CFA1BB007299F8 /* uiDraw.cpp */; };
+		3FA3215029CFA1BB007299F8 /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214429CFA1BB007299F8 /* velocity.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3FA320C829CF9FFA007299F8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3FA320CA29CF9FFA007299F8 /* artillerySim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = artillerySim; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FA320D529CFA0A2007299F8 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		3FA320D729CFA0AA007299F8 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		3FA3212929CFA1B9007299F8 /* testGround.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testGround.h; sourceTree = "<group>"; };
+		3FA3212A29CFA1B9007299F8 /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; };
+		3FA3212B29CFA1B9007299F8 /* testPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testPhysics.h; sourceTree = "<group>"; };
+		3FA3212C29CFA1B9007299F8 /* velocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
+		3FA3212D29CFA1B9007299F8 /* uiInteract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiInteract.cpp; sourceTree = "<group>"; };
+		3FA3212E29CFA1B9007299F8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3FA3212F29CFA1B9007299F8 /* ground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ground.h; sourceTree = "<group>"; };
+		3FA3213029CFA1B9007299F8 /* testVelocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testVelocity.h; sourceTree = "<group>"; };
+		3FA3213129CFA1B9007299F8 /* projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = projectile.cpp; sourceTree = "<group>"; };
+		3FA3213229CFA1B9007299F8 /* direction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = direction.cpp; sourceTree = "<group>"; };
+		3FA3213329CFA1B9007299F8 /* uiDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiDraw.h; sourceTree = "<group>"; };
+		3FA3213429CFA1BA007299F8 /* testDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testDirection.h; sourceTree = "<group>"; };
+		3FA3213529CFA1BA007299F8 /* projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = projectile.h; sourceTree = "<group>"; };
+		3FA3213629CFA1BA007299F8 /* uiInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiInteract.h; sourceTree = "<group>"; };
+		3FA3213729CFA1BA007299F8 /* testPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testPosition.h; sourceTree = "<group>"; };
+		3FA3213829CFA1BA007299F8 /* physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physics.cpp; sourceTree = "<group>"; };
+		3FA3213929CFA1BA007299F8 /* artillery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = artillery.cpp; sourceTree = "<group>"; };
+		3FA3213A29CFA1BA007299F8 /* artillery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = artillery.h; sourceTree = "<group>"; };
+		3FA3213B29CFA1BA007299F8 /* acceleration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = acceleration.h; sourceTree = "<group>"; };
+		3FA3213C29CFA1BA007299F8 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
+		3FA3213D29CFA1BA007299F8 /* testProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testProjectile.h; sourceTree = "<group>"; };
+		3FA3213E29CFA1BA007299F8 /* testArtillery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testArtillery.h; sourceTree = "<group>"; };
+		3FA3213F29CFA1BA007299F8 /* physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = physics.h; sourceTree = "<group>"; };
+		3FA3214029CFA1BA007299F8 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
+		3FA3214129CFA1BA007299F8 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
+		3FA3214229CFA1BA007299F8 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		3FA3214329CFA1BB007299F8 /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
+		3FA3214429CFA1BB007299F8 /* velocity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
+		3FA3214529CFA1BB007299F8 /* direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = direction.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3FA320C729CF9FFA007299F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FA320D629CFA0A2007299F8 /* GLUT.framework in Frameworks */,
+				3FA320D829CFA0AA007299F8 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3FA320C129CF9FFA007299F8 = {
+			isa = PBXGroup;
+			children = (
+				3FA320CC29CF9FFA007299F8 /* artillerySim */,
+				3FA320CB29CF9FFA007299F8 /* Products */,
+				3FA320D429CFA0A2007299F8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3FA320CB29CF9FFA007299F8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FA320CA29CF9FFA007299F8 /* artillerySim */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3FA320CC29CF9FFA007299F8 /* artillerySim */ = {
+			isa = PBXGroup;
+			children = (
+				3FA3213B29CFA1BA007299F8 /* acceleration.h */,
+				3FA3213929CFA1BA007299F8 /* artillery.cpp */,
+				3FA3213A29CFA1BA007299F8 /* artillery.h */,
+				3FA3213229CFA1B9007299F8 /* direction.cpp */,
+				3FA3214529CFA1BB007299F8 /* direction.h */,
+				3FA3214129CFA1BA007299F8 /* ground.cpp */,
+				3FA3212F29CFA1B9007299F8 /* ground.h */,
+				3FA3212E29CFA1B9007299F8 /* main.cpp */,
+				3FA3213829CFA1BA007299F8 /* physics.cpp */,
+				3FA3213F29CFA1BA007299F8 /* physics.h */,
+				3FA3213C29CFA1BA007299F8 /* position.cpp */,
+				3FA3212A29CFA1B9007299F8 /* position.h */,
+				3FA3213129CFA1B9007299F8 /* projectile.cpp */,
+				3FA3213529CFA1BA007299F8 /* projectile.h */,
+				3FA3214029CFA1BA007299F8 /* test.cpp */,
+				3FA3214229CFA1BA007299F8 /* test.h */,
+				3FA3213E29CFA1BA007299F8 /* testArtillery.h */,
+				3FA3213429CFA1BA007299F8 /* testDirection.h */,
+				3FA3212929CFA1B9007299F8 /* testGround.h */,
+				3FA3212B29CFA1B9007299F8 /* testPhysics.h */,
+				3FA3213729CFA1BA007299F8 /* testPosition.h */,
+				3FA3213D29CFA1BA007299F8 /* testProjectile.h */,
+				3FA3213029CFA1B9007299F8 /* testVelocity.h */,
+				3FA3214329CFA1BB007299F8 /* uiDraw.cpp */,
+				3FA3213329CFA1B9007299F8 /* uiDraw.h */,
+				3FA3212D29CFA1B9007299F8 /* uiInteract.cpp */,
+				3FA3213629CFA1BA007299F8 /* uiInteract.h */,
+				3FA3214429CFA1BB007299F8 /* velocity.cpp */,
+				3FA3212C29CFA1B9007299F8 /* velocity.h */,
+			);
+			path = artillerySim;
+			sourceTree = "<group>";
+		};
+		3FA320D429CFA0A2007299F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FA320D729CFA0AA007299F8 /* OpenGL.framework */,
+				3FA320D529CFA0A2007299F8 /* GLUT.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3FA320C929CF9FFA007299F8 /* artillerySim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FA320D129CF9FFA007299F8 /* Build configuration list for PBXNativeTarget "artillerySim" */;
+			buildPhases = (
+				3FA320C629CF9FFA007299F8 /* Sources */,
+				3FA320C729CF9FFA007299F8 /* Frameworks */,
+				3FA320C829CF9FFA007299F8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = artillerySim;
+			productName = artillerySim;
+			productReference = 3FA320CA29CF9FFA007299F8 /* artillerySim */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3FA320C229CF9FFA007299F8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					3FA320C929CF9FFA007299F8 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 3FA320C529CF9FFA007299F8 /* Build configuration list for PBXProject "artillerySim" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3FA320C129CF9FFA007299F8;
+			productRefGroup = 3FA320CB29CF9FFA007299F8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3FA320C929CF9FFA007299F8 /* artillerySim */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3FA320C629CF9FFA007299F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FA3214E29CFA1BB007299F8 /* ground.cpp in Sources */,
+				3FA3214B29CFA1BB007299F8 /* artillery.cpp in Sources */,
+				3FA3214D29CFA1BB007299F8 /* test.cpp in Sources */,
+				3FA3215029CFA1BB007299F8 /* velocity.cpp in Sources */,
+				3FA3214729CFA1BB007299F8 /* main.cpp in Sources */,
+				3FA3214829CFA1BB007299F8 /* projectile.cpp in Sources */,
+				3FA3214F29CFA1BB007299F8 /* uiDraw.cpp in Sources */,
+				3FA3214A29CFA1BB007299F8 /* physics.cpp in Sources */,
+				3FA3214C29CFA1BB007299F8 /* position.cpp in Sources */,
+				3FA3214629CFA1BB007299F8 /* uiInteract.cpp in Sources */,
+				3FA3214929CFA1BB007299F8 /* direction.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3FA320CF29CF9FFA007299F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3FA320D029CF9FFA007299F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3FA320D229CF9FFA007299F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3FA320D329CF9FFA007299F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3FA320C529CF9FFA007299F8 /* Build configuration list for PBXProject "artillerySim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FA320CF29CF9FFA007299F8 /* Debug */,
+				3FA320D029CF9FFA007299F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FA320D129CF9FFA007299F8 /* Build configuration list for PBXNativeTarget "artillerySim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FA320D229CF9FFA007299F8 /* Debug */,
+				3FA320D329CF9FFA007299F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3FA320C229CF9FFA007299F8 /* Project object */;
+}

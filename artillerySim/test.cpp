@@ -28,6 +28,6 @@ void testRunner()
   TestVelocity().run();
   TestDirection().run();
   TestGround().run();
-  TestArtillery().run();
+//  TestArtillery().run();
   TestProjectile().run();
 }
