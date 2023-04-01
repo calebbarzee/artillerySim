@@ -66,14 +66,14 @@ void Simulator::draw(ogstream & gout)
 
    // draw some text on the screen
    gout.setPosition(Position(ptUpperRight.getMetersX() * 0.80, ptUpperRight.getMetersY() * 0.90));
-         gout << "Altitude: "
-              << artillery.shell.getAltitude() << "\tm\n"
-              << "Speed: "
-              << artillery.shell.getSpeed() << "\tm/s\n"
-              << "Distance: "
-              << artillery.shell.getFlightDistance() << "\tm\n"
-              << "Hang Time: "
-              << artillery.shell.getFlightTime() << "\ts\n";
+   gout << "Altitude: "
+      << artillery.shell.getAltitude() << "\tm\n"
+      << "Speed: "
+      << artillery.shell.getSpeed() << "\tm/s\n"
+      << "Distance: "
+      << artillery.shell.getFlightDistance() << "\tm\n"
+      << "Hang Time: "
+      << artillery.shell.getFlightTime() << "\ts\n";
 }
 
 void Simulator::reset()

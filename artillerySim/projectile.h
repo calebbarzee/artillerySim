@@ -56,7 +56,7 @@ class Projectile
     friend TestProjectile;
 
     //constructors
-    Projectile() : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL){}; //default
+    Projectile() : position(), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL){}; //default
 
     //calc methods
     void reset();

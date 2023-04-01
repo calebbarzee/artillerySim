@@ -2,10 +2,11 @@
  *  File: direction.h
  ***************************************************************************/
 #pragma once
-#include <math.h>
+#include <cmath>
 #include <iostream>
 #include <iomanip>
- 
+#include <corecrt_math_defines.h>
+#define _USE_MATH_DEFINES
 /****************************************************************************
   * Class: Direction
   * Purpose: This class represents a direction in degrees or radians.

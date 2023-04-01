@@ -18,9 +18,9 @@ void Artillery::generateYPosition(const Ground & ground)
   {
     // when right arrow key is pressed, move barrel right
     // if elevation is 0, do not move right
-    if (elevation.getRadians() > 0)
+     if (elevation.getRadians() < M_PI_2)
     {
-      -- this->elevation;
+      ++ this->elevation;
     }
   }
 
@@ -28,9 +28,9 @@ void Artillery::generateYPosition(const Ground & ground)
   {
     // when left arrow key is pressed, move barrel left
     // if elevation is PI, do not move left
-    if (elevation.getRadians() < M_PI)
+    if (elevation.getRadians() > -M_PI_2)
     {
-      ++ this->elevation;
+      -- this->elevation;
     }
   }
 
@@ -92,6 +92,7 @@ void Artillery::generateYPosition(const Ground & ground)
     {
       moveDown();
     }
+    timeSinceFire += 0.5;
   }
 
 void Artillery::draw(ogstream & gout)
