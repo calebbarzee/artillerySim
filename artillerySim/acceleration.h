@@ -9,7 +9,6 @@
 
 #pragma once
 #include <math.h>
-#include "direction.h"
 
 using namespace std;
  /****************************************************************************
@@ -22,7 +21,7 @@ using namespace std;
   *  - getDdy(): returns y component of acceleration
   *  - setDdx(double): sets x component of acceleration
   *  - setDdy(double): sets y component of acceleration
-  *  - setAcceleration(double, Direction): sets acceleration based on magnitude and direction
+  *  - setAcceleration(double, angle): sets acceleration based on magnitude and angle
   *  - calcDdx(double, double): calculates x component of acceleration
   *  - calcDdy(double, double): calculates y component of acceleration
   ***************************************************************************/
@@ -31,9 +30,8 @@ class Acceleration
 public:
    // Constructors
    Acceleration() : ddx(0.0), ddy(0.0) {};
-   Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) {};
-   Acceleration(double magnitude, Direction direction) :
-   ddx(calcDdx(magnitude, direction.getRadians())), ddy(calcDdy(magnitude, direction.getRadians())) {};
+   Acceleration(double magnitude, double angle) :
+   ddx(calcDdx(magnitude, angle)), ddy(calcDdy(magnitude, angle)) {};
    
    // Getters
    double getDdx() const {return ddx;}
@@ -43,10 +41,10 @@ public:
    void setDdx(double ddx) { this->ddx = ddx; }
    void setDdy(double ddy) { this->ddy = ddy; }
    void setDdxDdy(double ddx, double ddy) { setDdx(ddx); setDdy(ddy); }
-   void setAcceleration(double acceleration, Direction direction)
+   void setAcceleration(double acceleration, double angle)
    {
-      setDdx(calcDdx(acceleration, direction.getRadians()));
-      setDdy(calcDdy(acceleration, direction.getRadians()));
+      setDdx(calcDdx(acceleration, angle));
+      setDdy(calcDdy(acceleration, angle));
    }
 
    // Compute vector components of velocity

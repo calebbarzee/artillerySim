@@ -97,8 +97,8 @@ private:
       Position position;
       position.x = 111.0;
       position.y = 222.0;
-      Direction direction;
-      direction.radians = M_PI_2;
+      double direction;
+      direction = M_PI_2;
       double muzzleVelocity = 100.0;
       // exercise
       projectile.fire(position, direction, muzzleVelocity);
@@ -123,8 +123,8 @@ private:
       Position pos;
       pos.x = 111.0;
       pos.y = 222.0;
-      Direction direction;
-      direction.radians = M_PI; // Directly to the left
+      double direction;
+      direction = M_PI; // Directly to the left
       double muzzleVelocity(100.0);
       // exercise
       p.fire(pos, direction, muzzleVelocity);
@@ -149,7 +149,7 @@ private:
       Position pos;
       pos.x = 111.0;
       pos.y = 222.0;
-      Direction d;
+      double d;
       d.radians = M_PI_2;
       double muzzleVelocity(100.0);
       // exercise

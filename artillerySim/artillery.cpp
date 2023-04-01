@@ -18,10 +18,10 @@ void Artillery::generateYPosition(const Ground & ground)
   {
     // when right arrow key is pressed, move barrel right
     // if elevation is 0, do not move right
-     double temp = elevation.getRadians() + 0.2;
+     double temp = elevation + 0.2;
     if (temp > -M_PI_2 && temp < M_PI_2)
     {
-      ++this->elevation;
+      this->elevation = (elevation + 0.1);
     }
   }
 
@@ -29,10 +29,10 @@ void Artillery::generateYPosition(const Ground & ground)
   {
     // when left arrow key is pressed, move barrel left
     // if elevation is PI, do not move left
-     double temp = elevation.getRadians() - 0.2;
+     double temp = elevation - 0.2;
     if (temp < M_PI_2 && temp > -M_PI_2)
     {
-      --this->elevation;
+      this->elevation = (elevation - 0.1);
     }
   }
 
@@ -40,13 +40,13 @@ void Artillery::generateYPosition(const Ground & ground)
   {
     // when up arrow key is pressed, move barrel up
     // if elevation is PI/2 (vertical), do not move up
-    if (elevation.getRadians() < 0)
+    if (elevation < 0)
     {
-      this->elevation.setRadians(elevation.getRadians() + 0.001);
+      this->elevation = (elevation + 0.001);
     }
-    else if (elevation.getRadians() > 0)
+    else if (elevation > 0)
     {
-      this->elevation.setRadians(elevation.getRadians() - 0.001);
+      this->elevation = (elevation - 0.001);
     }
   }
 
@@ -55,15 +55,15 @@ void Artillery::generateYPosition(const Ground & ground)
     // when down arrow key is pressed
     // if elevation is [PI/2, 0], move right
     // if elevation is [PI/2, PI], move left
-     double temp1 = elevation.getRadians() + 0.002;
-     double temp2 = elevation.getRadians() - 0.002;
+     double temp1 = elevation + 0.002;
+     double temp2 = elevation - 0.002;
     if (temp1 > 0 && temp1 < M_PI_2)
     {
-      this->elevation.setRadians(elevation.getRadians() + 0.001);
+      this->elevation = (elevation + 0.001);
     }
     else if (temp2 < 0 && temp2 > -M_PI_2)
     {
-      this->elevation.setRadians(elevation.getRadians() - 0.001);
+      this->elevation = (elevation - 0.001);
     }
   }
 
@@ -100,5 +100,5 @@ void Artillery::generateYPosition(const Ground & ground)
 
 void Artillery::draw(ogstream & gout)
 {
-  gout.drawHowitzer(position, elevation.getRadians(), timeSinceFire);
+  gout.drawHowitzer(position, elevation, timeSinceFire);
 }

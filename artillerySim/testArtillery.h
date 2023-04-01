@@ -42,7 +42,7 @@ private:
       assert(artillery.position.x == 0.0);
       assert(artillery.position.y == 0.0);
       assert(artillery.muzzleVelocity == 827.0);
-      assert(artillery.elevation.radians == M_PI / 4.0);
+      assert(artillery.elevation == M_PI / 4.0);
       // teardown
       teardownStandardFixture();
    }
@@ -55,7 +55,7 @@ private:
       pos.x = 11000.0;
       pos.y = 11000.0;
       Artillery artillery;
-      artillery.elevation.radians = 0.222;
+      artillery.elevation = 0.222;
       artillery.position.x = 220000.0;
       artillery.position.y = 220000.0;
       // exercise
@@ -63,7 +63,7 @@ private:
       // verify
       assert(1.0 <= artillery.position.x && artillery.position.x <= 9900.0);
       assert(artillery.muzzleVelocity == 827.0);
-      assert(artillery.elevation.radians == 0.222);
+      assert(artillery.elevation == 0.222);
       // teardown
       teardownStandardFixture();
    }
@@ -76,7 +76,7 @@ private:
       pos.x = 1100000.0;
       pos.y = 1100000.0;
       Artillery artillery;
-      artillery.elevation.radians = 0.222;
+      artillery.elevation = 0.222;
       artillery.position.x = 2200000.0;
       artillery.position.y = 2200000.0;
       // exercise
@@ -84,7 +84,7 @@ private:
       // verify
       assert(110000.0 <= artillery.position.x && artillery.position.x <= 990000.0);
       assert(artillery.muzzleVelocity == 827.0);
-      assert(artillery.elevation.radians == 0.222);
+      assert(artillery.elevation == 0.222);
       // teardown
       teardownStandardFixture();
    }
@@ -94,7 +94,7 @@ private:
       // setup
       setupStandardFixture();
       Artillery artillery;
-      artillery.elevation.radians = 0.5;
+      artillery.elevation = 0.5;
       artillery.position.x = 1.1;
       artillery.position.y = 2.2;
       // exercise
@@ -103,7 +103,7 @@ private:
       assert(artillery.position.x == 1.1);
       assert(artillery.position.y == 2.2);
       assert(artillery.muzzleVelocity == 827.0);
-//      assert(artillery.elevation.radians == 0.4);
+//      assert(artillery.elevation == 0.4);
             // when a move function is called, elevation changes by 0.1
       // teardown
       teardownStandardFixture();
@@ -114,7 +114,7 @@ private:
       // setup
       setupStandardFixture();
       Artillery artillery;
-      artillery.elevation.radians = 0.5;
+      artillery.elevation = 0.5;
       artillery.position.x = 1.1;
       artillery.position.y = 2.2;
       // exercise
@@ -123,7 +123,7 @@ private:
       assert(artillery.position.x == 1.1);
       assert(artillery.position.y == 2.2);
       assert(artillery.muzzleVelocity == 827.0);
-//      assert(artillery.elevation.radians == 0.501);
+//      assert(artillery.elevation == 0.501);
       // teardown
       teardownStandardFixture();
    }
@@ -133,7 +133,7 @@ private:
       // setup
       setupStandardFixture();
       Artillery artillery;
-      artillery.elevation.radians = 2.0;
+      artillery.elevation = 2.0;
       artillery.position.x = 1.1;
       artillery.position.y = 2.2;
       // exercise
@@ -142,7 +142,7 @@ private:
       assert(artillery.position.x == 1.1);
       assert(artillery.position.y == 2.2);
       assert(artillery.muzzleVelocity == 827.0);
-//      assert(artillery.elevation.radians == 2.1);
+//      assert(artillery.elevation == 2.1);
       // teardown
       teardownStandardFixture();
    }
@@ -152,7 +152,7 @@ private:
       // setup
       setupStandardFixture();
       Artillery artillery;
-      artillery.elevation.radians = 2.0;
+      artillery.elevation = 2.0;
       artillery.position.x = 1.1;
       artillery.position.y = 2.2;
       // exercise
@@ -161,7 +161,7 @@ private:
       assert(artillery.position.x == 1.1);
       assert(artillery.position.y == 2.2);
       assert(artillery.muzzleVelocity == 827.0);
-//      assert(artillery.elevation.radians == 1.999);
+//      assert(artillery.elevation == 1.999);
       // teardown
       teardownStandardFixture();
    }

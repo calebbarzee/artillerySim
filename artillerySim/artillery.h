@@ -1,6 +1,5 @@
 #pragma once
 
-#include "direction.h"
 #include "position.h"
 #include "ground.h"
 #include "projectile.h"
@@ -13,19 +12,21 @@ class Artillery
 {
 public:
   friend class TestArtillery;
-   Artillery() : position(Position()), elevation(Direction(M_PI_4)), timeSinceFire(-1) {};
-   Artillery(Position pos) : position(pos), elevation(Direction(M_PI_4)), timeSinceFire(-1){};
+   Artillery() : position(Position()), elevation(M_PI_4), timeSinceFire(-1) {};
+   Artillery(Position pos) : position(pos), elevation(M_PI_4), timeSinceFire(-1){};
   void generateXPosition(const Position & pos);
   void generateYPosition(const Ground & ground);
   void moveRight();
   void moveLeft();
   void moveUp();
   void moveDown();
-  void setElevation(Direction elevation) { this->elevation = elevation; }
-  void setPosition(Position position) {this->position = position; }
+  void setElevation(double elevation) { this->elevation = elevation; }
+  void setPosition(Position position) { this->position = position; }
+   void setTimeSinceFire(double time) { this->timeSinceFire = time; }
   Position getPosition() const { return position; }
-  Direction getElevation() const { return elevation; }
+  double getElevation() const { return elevation; }
   double getMuzzleVelocity() const { return muzzleVelocity; }
+   double getTimeSinceFire() const { return timeSinceFire; }
 
   void fireShell();
   void update(const Interface* pUI);
@@ -35,6 +36,6 @@ public:
 private:
   constexpr static double muzzleVelocity = 827.0;
   Position position;
-  Direction elevation;
+  double elevation;
   double timeSinceFire;
 };

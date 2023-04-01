@@ -53,10 +53,11 @@ void Projectile::reset()
     velocity.setDx(0);
     velocity.setDy(0);
 }
-void Projectile::fire(Position position, Direction angle, double muzzleVelocity)
+void Projectile::fire(Position position, double angle, double muzzleVelocity)
 {
     this->position = position;
-    velocity.setVelocity(muzzleVelocity, angle.getRadians());
+    this->velocity.setVelocity(muzzleVelocity, angle);
+    this->angle = angle;
     // set the status to in flight
     this->status = IN_FLIGHT;
     // make a pvt struct and add it to the flight path
@@ -66,16 +67,10 @@ void Projectile::fire(Position position, Direction angle, double muzzleVelocity)
 }
 void Projectile::advance()
 {
-    if (status == ON_GROUND)
-    {
-       return;
-    }
-    else if (status == IN_BARREL)
-    {
-        // if the projectile is in the barrel then return
-        return;
-    }
-
+   if (status != IN_FLIGHT)
+      return;
+   assert(this->status != IN_BARREL);
+   assert(this->status != ON_GROUND);
     // acceleration should be set to zero because it is based on force.
    assert(this->acceleration.getDdx() == 0.0);
    assert(this->acceleration.getDdy() == 0.0);
@@ -97,9 +92,7 @@ void Projectile::advance()
     // get gravity from altitude
     double gravityAcceleration = gravity_from_altitude(altitude);
     // make a new acceleration object with gravity downward
-    Direction down;
-    down.setDown();
-    Acceleration gravityA(gravityAcceleration, down);
+    Acceleration gravityA(gravityAcceleration, M_PI);
     // set our projectile's acceleration
     this->acceleration = dragA;
     this->acceleration += gravityA;

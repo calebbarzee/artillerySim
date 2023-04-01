@@ -11,7 +11,6 @@
 #pragma once
 #include <math.h>
 #include "position.h"
-#include "direction.h"
 #include "velocity.h"
 #include "acceleration.h"
 

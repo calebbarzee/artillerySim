@@ -14,7 +14,6 @@
 #include <vector>
 #include "acceleration.h"
 #include "velocity.h"
-#include "direction.h"
 #include "position.h"
 #include "physics.h"
 #include "uiDraw.h"
@@ -48,7 +47,7 @@ class Projectile
     Velocity velocity;
     Acceleration acceleration;
     Position position;
-    Direction angle;
+    double angle;
     double timeElapsed;
     Status status;
   public:
@@ -56,11 +55,11 @@ class Projectile
     friend TestProjectile;
 
     //constructors
-    Projectile() : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL){}; //default
+    Projectile() : position(Position()), angle(M_PI_4), timeElapsed(0), status(IN_BARREL){}; //default
 
     //calc methods
     void reset();
-    void fire(Position position, Direction angle, double muzzleVelocity);
+    void fire(Position position, double angle, double muzzleVelocity);
     void advance();
     void draw(ogstream & gout) const;
 

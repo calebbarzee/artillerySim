@@ -32,7 +32,7 @@ void Simulator::input(const Interface* pUI)
 
 void Simulator::update()
 {
-   if (artillery.shell.getPosition().getMetersY() == ground.getElevationMeters(artillery.shell.getPosition()))
+   if (artillery.getTimeSinceFire() > 0.0 && artillery.shell.getPosition().getMetersY() == ground.getElevationMeters(artillery.shell.getPosition()))
    {
        // set the status to on ground
        artillery.shell.setStatus(Status::ON_GROUND);
@@ -48,6 +48,7 @@ void Simulator::update()
    }
    else //update the projectile
    {
+      artillery.setTimeSinceFire(artillery.getTimeSinceFire() + 0.5);
       artillery.shell.advance();
    }
    
@@ -65,7 +66,7 @@ void Simulator::draw(ogstream & gout)
    artillery.shell.draw(gout);
 
    // draw some text on the screen
-   gout.setPosition(Position(ptUpperRight.getMetersX() * 0.80, ptUpperRight.getMetersY() * 0.90));
+   gout.setPosition(Position(ptUpperRight.getMetersX() * 0.70, ptUpperRight.getMetersY() * 0.80));
          gout << "Altitude: "
               << artillery.shell.getAltitude() << "\tm\n"
               << "Speed: "
