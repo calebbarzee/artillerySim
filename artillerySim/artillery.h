@@ -13,8 +13,8 @@ class Artillery
 {
 public:
   friend class TestArtillery;
-   Artillery() : position(Position()), elevation(Direction(M_PI_4)) {};
-   Artillery(Position pos) : position(pos), elevation(Direction(M_PI_4)) {};
+   Artillery() : position(Position()), elevation(Direction(M_PI_4)), timeSinceFire(-1) {};
+   Artillery(Position pos) : position(pos), elevation(Direction(M_PI_4)), timeSinceFire(-1){};
   void generateXPosition(const Position & pos);
   void generateYPosition(const Ground & ground);
   void moveRight();
