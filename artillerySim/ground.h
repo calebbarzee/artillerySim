@@ -27,9 +27,12 @@ class Ground
    friend TestProjectile;
 
 public:
-   // the constructor generates the ground
-   Ground(const Position &posUpperRight);
+   //default constructor
    Ground() : ground(nullptr), iHowitzer(0), iTarget(0) {}
+   // the constructor generates the ground
+   Ground(const Position & posUpperRight);
+   
+   void init(const Position & posUpperRight);
    
    // reset the game
    void reset(Position & posHowitzer);

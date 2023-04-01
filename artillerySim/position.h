@@ -70,10 +70,6 @@ public:
    void add(const Velocity & velocity, const Acceleration & acceleration, const double t);
 };
 
-// stream I/O useful for debugging
-std::ostream & operator << (std::ostream & out, const Position& pt);
-std::istream & operator >> (std::istream & in, Position& pt);
-
 /*********************************************
  * PT
  * Trivial point, no units implied

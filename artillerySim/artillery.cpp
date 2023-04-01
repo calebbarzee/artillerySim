@@ -2,14 +2,17 @@
 
 #include "artillery.h"
 
-  void Artillery::generatePosition(Position pos)
+  void Artillery::generateXPosition(const Position & pos)
   {
      // with the given position's x generate a position for the artillery within [x, x*9]
-     // y must be == 0
-     double x = random(pos.getMetersX() / 10, pos.getMetersX() / 10 * 9);
+     double x = random(pos.getMetersX() * 0.1, pos.getMetersX() * 0.9);
      this->position.setMetersX(x);
-     this->position.setMetersY(0.0);
-  } 
+  }
+
+void Artillery::generateYPosition(const Ground & ground)
+{
+   this->position.setMetersY(ground.getElevationMeters(this->getPosition()));
+}
 
   void Artillery::moveRight()
   {
@@ -62,30 +65,30 @@
 
   void Artillery::fireShell()
   {
-    if (shell.getStatus() == Status::IN_FLIGHT)
+    if (shell.getStatus() == Status::IN_FLIGHT || shell.getStatus() == Status::ON_GROUND)
     {
-      return; // do not fire if shell is in flight
+      return; // do not fire if shell is in flight or on ground
     }
     // when space bar is pressed, fire a shell
     timeSinceFire = 0;
     shell.fire(position, elevation, muzzleVelocity);
   }
 
-  void Artillery::update(const Interface& ui) 
+  void Artillery::update(const Interface* pUI)
   {
-    if (ui.isRight())
+    if (pUI->isRight())
     {
       moveRight();
     }
-    if (ui.isLeft())
+    if (pUI->isLeft())
     {
       moveLeft();
     }
-    if (ui.isUp())
+    if (pUI->isUp())
     {
       moveUp();
     }
-    if (ui.isDown())
+    if (pUI->isDown())
     {
       moveDown();
     }

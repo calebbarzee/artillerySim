@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3B3DE429D87F3E00D62605 /* simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F3B3DE329D87F3E00D62605 /* simulator.cpp */; };
 		3FA320D629CFA0A2007299F8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA320D529CFA0A2007299F8 /* GLUT.framework */; };
 		3FA320D829CFA0AA007299F8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FA320D729CFA0AA007299F8 /* OpenGL.framework */; };
 		3FA3214629CFA1BB007299F8 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3212D29CFA1B9007299F8 /* uiInteract.cpp */; };
@@ -16,10 +17,10 @@
 		3FA3214A29CFA1BB007299F8 /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213829CFA1BA007299F8 /* physics.cpp */; };
 		3FA3214B29CFA1BB007299F8 /* artillery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213929CFA1BA007299F8 /* artillery.cpp */; };
 		3FA3214C29CFA1BB007299F8 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3213C29CFA1BA007299F8 /* position.cpp */; };
-		3FA3214D29CFA1BB007299F8 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214029CFA1BA007299F8 /* test.cpp */; };
 		3FA3214E29CFA1BB007299F8 /* ground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214129CFA1BA007299F8 /* ground.cpp */; };
 		3FA3214F29CFA1BB007299F8 /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214329CFA1BB007299F8 /* uiDraw.cpp */; };
 		3FA3215029CFA1BB007299F8 /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3214429CFA1BB007299F8 /* velocity.cpp */; };
+		3FD5B1F729D878B000EA403D /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5B1F629D878B000EA403D /* test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F3B3DE329D87F3E00D62605 /* simulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simulator.cpp; sourceTree = "<group>"; };
 		3FA320CA29CF9FFA007299F8 /* artillerySim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = artillerySim; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FA320D529CFA0A2007299F8 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		3FA320D729CFA0AA007299F8 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -61,12 +63,13 @@
 		3FA3213D29CFA1BA007299F8 /* testProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testProjectile.h; sourceTree = "<group>"; };
 		3FA3213E29CFA1BA007299F8 /* testArtillery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testArtillery.h; sourceTree = "<group>"; };
 		3FA3213F29CFA1BA007299F8 /* physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = physics.h; sourceTree = "<group>"; };
-		3FA3214029CFA1BA007299F8 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		3FA3214129CFA1BA007299F8 /* ground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ground.cpp; sourceTree = "<group>"; };
 		3FA3214229CFA1BA007299F8 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		3FA3214329CFA1BB007299F8 /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
 		3FA3214429CFA1BB007299F8 /* velocity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
 		3FA3214529CFA1BB007299F8 /* direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = direction.h; sourceTree = "<group>"; };
+		3FD5B1F529D872A300EA403D /* simulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; };
+		3FD5B1F629D878B000EA403D /* test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +114,15 @@
 				3FA3212F29CFA1B9007299F8 /* ground.h */,
 				3FA3212E29CFA1B9007299F8 /* main.cpp */,
 				3FA3213829CFA1BA007299F8 /* physics.cpp */,
+				3FD5B1F529D872A300EA403D /* simulator.h */,
+				3F3B3DE329D87F3E00D62605 /* simulator.cpp */,
 				3FA3213F29CFA1BA007299F8 /* physics.h */,
 				3FA3213C29CFA1BA007299F8 /* position.cpp */,
 				3FA3212A29CFA1B9007299F8 /* position.h */,
 				3FA3213129CFA1B9007299F8 /* projectile.cpp */,
 				3FA3213529CFA1BA007299F8 /* projectile.h */,
-				3FA3214029CFA1BA007299F8 /* test.cpp */,
 				3FA3214229CFA1BA007299F8 /* test.h */,
+				3FD5B1F629D878B000EA403D /* test.cpp */,
 				3FA3213E29CFA1BA007299F8 /* testArtillery.h */,
 				3FA3213429CFA1BA007299F8 /* testDirection.h */,
 				3FA3212929CFA1B9007299F8 /* testGround.h */,
@@ -201,17 +206,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FA3214E29CFA1BB007299F8 /* ground.cpp in Sources */,
 				3FA3214B29CFA1BB007299F8 /* artillery.cpp in Sources */,
-				3FA3214D29CFA1BB007299F8 /* test.cpp in Sources */,
-				3FA3215029CFA1BB007299F8 /* velocity.cpp in Sources */,
+				3FA3214929CFA1BB007299F8 /* direction.cpp in Sources */,
+				3FA3214E29CFA1BB007299F8 /* ground.cpp in Sources */,
 				3FA3214729CFA1BB007299F8 /* main.cpp in Sources */,
+				3FA3214A29CFA1BB007299F8 /* physics.cpp in Sources */,
+				3FD5B1F729D878B000EA403D /* test.cpp in Sources */,
+				3F3B3DE429D87F3E00D62605 /* simulator.cpp in Sources */,
+				3FA3214C29CFA1BB007299F8 /* position.cpp in Sources */,
 				3FA3214829CFA1BB007299F8 /* projectile.cpp in Sources */,
 				3FA3214F29CFA1BB007299F8 /* uiDraw.cpp in Sources */,
-				3FA3214A29CFA1BB007299F8 /* physics.cpp in Sources */,
-				3FA3214C29CFA1BB007299F8 /* position.cpp in Sources */,
 				3FA3214629CFA1BB007299F8 /* uiInteract.cpp in Sources */,
-				3FA3214929CFA1BB007299F8 /* direction.cpp in Sources */,
+				3FA3215029CFA1BB007299F8 /* velocity.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

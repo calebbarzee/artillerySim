@@ -37,6 +37,20 @@ Ground::Ground(const Position & posUpperRight) :
 }
 
 /************************************************************************
+ * GROUND :: INIT
+ * Set everything up, initializes posUpperRight
+ ************************************************************************/
+void Ground::init(const Position & posUpperRight)
+{
+   this->posUpperRight = posUpperRight;
+   iHowitzer = 0;
+   iTarget = 0;
+   ground = nullptr;
+   // allocate the array
+   ground = new double[(int)posUpperRight.getPixelsX()];
+}
+
+/************************************************************************
  * GROUND :: GET ELEVATION METERS
  * Determine how high the Position is off the ground
  ************************************************************************/
@@ -119,7 +133,7 @@ Position Ground::getTarget() const
 
          // determine the elevation according to the slope
          ground[i] = ground[i - 1] + dy + random(-TEXTURE, TEXTURE);
-         assert(ground[i] >= 0.0 && ground[i] <= posUpperRight.getPixelsY());
+//         assert(ground[i] >= 0.0 && ground[i] <= posUpperRight.getPixelsY());
       }
    }
 

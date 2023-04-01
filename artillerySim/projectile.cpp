@@ -1,9 +1,43 @@
-#pragma once
-
 #include "projectile.h"
-#include "physics.h"
-#include "direction.h"
 #include <cassert>
+
+double Projectile::getAltitude() const
+{
+   if (flightPath.size() != 0)
+   return flightPath.back().position.getMetersY();
+   else
+      return -1.0; //invalid state
+}
+Position Projectile::getPosition() const
+{
+   if (flightPath.size() != 0)
+   return flightPath.back().position;
+   else
+      return this->position; //defualt state
+      
+}
+double Projectile::getFlightTime() const
+{
+   if (flightPath.size() != 0)
+   return flightPath.back().time;
+   else
+      return -1.0; //invalid state
+}
+double Projectile::getFlightDistance() const
+{
+   if (flightPath.size() != 0)
+   return flightPath.back().position.getMetersX();
+   else
+      return -1.0; //invalid state
+   
+}
+double Projectile::getSpeed() const
+{
+   if (flightPath.size() != 0)
+   return flightPath.back().velocity.getSpeed();
+   else
+      return -1.0; //invalid state
+}
 
 void Projectile::reset()
 {
@@ -30,15 +64,11 @@ void Projectile::fire(Position position, Direction angle, double muzzleVelocity)
     // set the first element in the flight path
     flightPath.push_back(firstPVT);
 }
-void Projectile::advance(const Ground & ground)
+void Projectile::advance()
 {
-    // if the projectile position is same as ground then it has hit the ground
-    if (this->position.getMetersY() == ground.getElevationMeters(position))
+    if (status == ON_GROUND)
     {
-        // set the status to on ground
-        this->status = ON_GROUND;
-        // return
-        return;
+       return;
     }
     else if (status == IN_BARREL)
     {
@@ -49,7 +79,6 @@ void Projectile::advance(const Ground & ground)
     // acceleration should be set to zero because it is based on force.
    assert(this->acceleration.getDdx() == 0.0);
    assert(this->acceleration.getDdy() == 0.0);
-   
    
    // before adding the acceleration we need to calc acceleration of
     // gravity and air resistance, should be found in physics file.
@@ -93,10 +122,10 @@ void Projectile::draw(ogstream & gout) const
     // draw the flight path
     if (status == IN_FLIGHT)
     {
-    long length = flightPath.size();
-    for (int i = 0; i < 10; i++)
-    {
+       long length = flightPath.size();
+       for (int i = 0; i < 10; i++)
+       {
         gout.drawProjectile(flightPath[length-i].position, double(i) );
-    }
+       }
     }
 }

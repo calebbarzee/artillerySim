@@ -15,7 +15,6 @@
 #include <limits>
 #include "direction.h"
 
-using namespace std;
 /****************************************************************************
   * Class: TEST DIRECTION
   * Attributes: 

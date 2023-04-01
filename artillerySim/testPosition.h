@@ -10,13 +10,10 @@
 
 #pragma once
 
-#include <iostream>
 #include "position.h"
 #include "velocity.h"
 #include "acceleration.h"
 #include <cassert>
-
-using namespace std;
 
 class TestPosition
 {

@@ -1,19 +1,12 @@
 /****************************************************************************
  * C++ File:
- *    Test : The main driver program to run all tests
+ *    Test: Import all test classes to be tested
  * Author:
  *    Caleb Barzee
  * Summary:
- *    Test runner for all unit tests
+ *   Test all test classes. Test runner for all unit tests
  ***************************************************************************/
-#pragma once
-#include "testPosition.h"
-#include "testPhysics.h"
-#include "testVelocity.h"
-#include "testDirection.h"
-#include "testGround.h"
-#include "testArtillery.h"
-#include "testProjectile.h"
+#include "test.h"
 
 /*******************************
  * Test Runner
@@ -29,4 +22,4 @@ void testRunner()
   TestGround().run();
   TestArtillery().run();
   TestProjectile().run();
-};
+}

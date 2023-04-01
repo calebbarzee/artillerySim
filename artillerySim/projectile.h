@@ -1,6 +1,6 @@
 /***********************************************************************
  * Header File:
- *    Point : The representation of a position 
+ *    Projectile: The representation of an artillery projectile.
  * Author:
  *    Caleb Barzee
  * Summary:
@@ -16,15 +16,15 @@
 #include "velocity.h"
 #include "direction.h"
 #include "position.h"
-#include "ground.h"
-#include "uiInteract.h"
+#include "physics.h"
+#include "uiDraw.h"
 
-using namespace std;
 /*********************************************
  * PositionVelocityTime
  * A convenient tracking of state in the simulation
  *********************************************/
-struct PVT {
+struct PVT
+{
     Position position;
     Velocity velocity;
     double time;
@@ -43,7 +43,7 @@ class Projectile
     constexpr static double mass = 46.7; //kilograms
     constexpr static double radius = 0.077545; //meters
     constexpr static double area = 0.0188424183; //meters^2
-    double timeInterval; //seconds
+    constexpr static double timeInterval = 2.0;  // simulation runs 2 seconds per frame 30 frames per second
     vector<PVT> flightPath;
     Velocity velocity;
     Acceleration acceleration;
@@ -56,21 +56,23 @@ class Projectile
     friend TestProjectile;
 
     //constructors
-    Projectile() : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL), timeInterval(1.0){}; //default
-    Projectile(double interval) : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL), timeInterval(interval){};
+    Projectile() : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL){}; //default
 
     //calc methods
     void reset();
     void fire(Position position, Direction angle, double muzzleVelocity);
-    void advance(const Ground & ground);
+    void advance();
     void draw(ogstream & gout) const;
 
     //getters
     Status getStatus() const {return status;}
-    double getAltitude() const {return flightPath.back().position.getMetersY();}
-    Position getPosition() const {return flightPath.back().position;}
-    double getFlightTime() const {return flightPath.back().time;}
-    double getElapsedTime() const {return timeElapsed;} // equivalent to getFlightTime()
-    double getFlightDistance() const {return flightPath.back().position.getMetersX();}
-    double getSpeed() const {return flightPath.back().velocity.getSpeed();}
+   double getElapsedTime() const {return timeElapsed;} // equivalent to getFlightTime()
+   double getAltitude() const;
+   Position getPosition() const;
+   double getFlightTime() const;
+   double getFlightDistance() const;
+   double getSpeed() const;
+   
+   //settters
+   void setStatus(Status status) { this->status = status; }
 };

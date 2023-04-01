@@ -8,14 +8,10 @@
  ***************************************************************************/
 
 #pragma once
-
 #include "velocity.h"
 #include "acceleration.h"
 #include <cassert>
-#include <iostream>
 #include <math.h>
-
-using namespace std;
 
 /****************************************************************************
   * Class: TEST VELOCITY

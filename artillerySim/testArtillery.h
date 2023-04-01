@@ -5,8 +5,6 @@
 #include <cassert>
 #include <math.h>
 
-using namespace std;
-
 /*********************************************
  * Test Artillery
  * Contains a class with automation to test the artillery class
@@ -61,10 +59,9 @@ private:
       artillery.position.x = 220000.0;
       artillery.position.y = 220000.0;
       // exercise
-      artillery.generatePosition(pos);
+      artillery.generateXPosition(pos);
       // verify
       assert(1.0 <= artillery.position.x && artillery.position.x <= 9900.0);
-      assert(0.0 == artillery.position.y);
       assert(artillery.muzzleVelocity == 827.0);
       assert(artillery.elevation.radians == 0.222);
       // teardown
@@ -83,10 +80,9 @@ private:
       artillery.position.x = 2200000.0;
       artillery.position.y = 2200000.0;
       // exercise
-      artillery.generatePosition(pos);
+      artillery.generateXPosition(pos);
       // verify
       assert(110000.0 <= artillery.position.x && artillery.position.x <= 990000.0);
-      assert(0.0 == artillery.position.y);
       assert(artillery.muzzleVelocity == 827.0);
       assert(artillery.elevation.radians == 0.222);
       // teardown

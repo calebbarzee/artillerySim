@@ -15,8 +15,6 @@
 #include <vector>
 
 
-using namespace std;
-
 /*******************************
  * TEST GROUND
  * A friend class for Ground which contains the Ground unit tests

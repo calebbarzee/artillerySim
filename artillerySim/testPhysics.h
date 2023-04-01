@@ -4,8 +4,6 @@
 #include <cassert>
 #include <math.h>
 
-using namespace std;
-
 /*********************************************
  * Test Physics
  * Contains a class with automation to test the physics class
