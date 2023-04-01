@@ -67,6 +67,6 @@ private:
    double dx;
    double dy;
    // Compute vector components of velocity
-   static double calcDx(double v, double angle) { return cos(angle) * v;}
-   static double calcDy(double v, double angle) { return sin(angle) * v;}
+   static double calcDx(double v, double angle) { return sin(angle) * v;}
+   static double calcDy(double v, double angle) { return cos(angle) * v;}
 };

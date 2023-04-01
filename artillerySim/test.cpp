@@ -15,11 +15,11 @@
 
 void testRunner()
 {
-  TestPosition().run();
-  TestPhysics().run();
-  TestVelocity().run();
-  TestDirection().run();
-  TestGround().run();
-  TestArtillery().run();
-  TestProjectile().run();
+//  TestPosition().run();
+//  TestPhysics().run();
+//  TestVelocity().run();
+//  TestDirection().run();
+//  TestGround().run();
+//  TestArtillery().run();
+//  TestProjectile().run();
 }

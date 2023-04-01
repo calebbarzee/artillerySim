@@ -57,7 +57,6 @@ void Projectile::fire(Position position, double angle, double muzzleVelocity)
 {
     this->position = position;
     this->velocity.setVelocity(muzzleVelocity, angle);
-    this->angle = angle;
     // set the status to in flight
     this->status = IN_FLIGHT;
     // make a pvt struct and add it to the flight path

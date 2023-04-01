@@ -69,7 +69,7 @@ void Artillery::generateYPosition(const Ground & ground)
 
   void Artillery::fireShell()
   {
-    if (shell.getStatus() == Status::IN_FLIGHT || shell.getStatus() == Status::ON_GROUND)
+    if (shell.getStatus() != Status::IN_BARREL)
     {
       return; // do not fire if shell is in flight or on ground
     }

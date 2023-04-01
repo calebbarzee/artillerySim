@@ -48,8 +48,8 @@ public:
    }
 
    // Compute vector components of velocity
-   static double calcDdx(double a, double angle) { return cos(angle) * a;}
-   static double calcDdy(double a, double angle) { return sin(angle) * a;}
+   static double calcDdx(double a, double angle) { return sin(angle) * a;}
+   static double calcDdy(double a, double angle) { return cos(angle) * a;}
    
    /****************************************************************************
     * Operater Overload += acceleration ():
