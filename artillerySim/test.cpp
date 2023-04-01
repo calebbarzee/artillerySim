@@ -7,7 +7,6 @@
  *    Test runner for all unit tests
  ***************************************************************************/
 #pragma once
-
 #include "testPosition.h"
 #include "testPhysics.h"
 #include "testVelocity.h"
@@ -30,4 +29,4 @@ void testRunner()
   TestGround().run();
   TestArtillery().run();
   TestProjectile().run();
-}
+};

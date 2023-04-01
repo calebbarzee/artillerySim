@@ -1,8 +1,3 @@
-#include "test.h"
-#include <iostream>
-
-using namespace std;
-
 /*************************************************************
  * 1. Name:
  *      The Key
@@ -15,6 +10,7 @@ using namespace std;
  * 5. How long did it take for you to complete the assignment?
  *      ??
  *****************************************************************/
+#pragma once
 
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
@@ -22,7 +18,9 @@ using namespace std;
 #include "ground.h"     // for GROUND
 #include "position.h"   // for POINT
 #include "artillery.h"
-#include "test.h"       // for TESTRUNNER()
+#include "test.h"
+#include <iostream>
+
 
 using namespace std;
 

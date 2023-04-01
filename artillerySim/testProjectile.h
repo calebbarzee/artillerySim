@@ -172,10 +172,9 @@ private:
   void test_advance_nothing()
   {
     // setup
-    Ground g;
-    setupGroundStandardFixture(g);
     setupStandardFixture();
     Projectile p;
+    Ground g;
     // exercise
     p.advance(g);
     // verify
@@ -183,18 +182,16 @@ private:
     assert(p.radius == 0.077545);
     assert(p.flightPath.empty() == true);
     // teardown
-    teardownGroundStandardFixture(g);
     teardownStandardFixture();
   }
 
   void test_advance_fall()
   {
     // setup
-    Ground g;
-    setupGroundStandardFixture(g);
     setupStandardFixture();
     Projectile p;
     Position pos;
+    Ground g;
     PVT pvt;
     p.position.x = 100.0;
     p.position.y = 200.0;
@@ -221,18 +218,16 @@ private:
      assert(closeEnough(-9.8, p.flightPath.back().velocity.dy, 0.01));
     assert(p.flightPath.back().time == 1.0);
     // teardown
-    teardownGroundStandardFixture(g);
     teardownStandardFixture();
   }
 
   void test_advance_up()
   {
     // setup
-    Ground g;
-    setupGroundStandardFixture(g);
     setupStandardFixture();
     Projectile p;
     Position pos;
+    Ground g;
     PVT pvt;
     p.position.x = 100.0;
     p.position.y = 200.0;
@@ -262,18 +257,16 @@ private:
     assert(closeEnough(89.80, p.flightPath.back().velocity.dy, 0.01));
     assert(p.flightPath.back().time == 1.0);
     // teardown
-    teardownGroundStandardFixture(g);
     teardownStandardFixture();
   }
 
   void test_advance_diagonal()
   {
     // setup
-    Ground g;
-    setupGroundStandardFixture(g);
     setupStandardFixture();
     Projectile p;
     Position pos;
+    Ground g;
     PVT pvt;
      p.position.x = 100.0;
      p.position.y = 200.0;
@@ -303,50 +296,22 @@ private:
      assert(closeEnough(30.12, p.flightPath.back().velocity.dy, 0.01));
     assert(p.flightPath.back().time == 101.0);
     // teardown
-    teardownGroundStandardFixture(g);
     teardownStandardFixture();
   }
 
   void setupStandardFixture()
    {
       Position pos;
+      Ground g;
       metersFromPixels = pos.metersFromPixels;
       pos.metersFromPixels = 1.0;
+      g.posUpperRight.metersFromPixels = 1.0;
    }
    void teardownStandardFixture()
    {
       assert(metersFromPixels != -1.0);
       Position pos;
+      Ground g;
       pos.metersFromPixels = metersFromPixels;
-   }
-
-
-  // Ground Standard Fixture
-   // standard fixture: 10 x 10 with howitzer at 5 and target at 7
-   void setupGroundStandardFixture(Ground& g)
-   {
-      metersFromPixels = g.posUpperRight.metersFromPixels;
-      g.posUpperRight.metersFromPixels = 1100.0;
-
-      // delete the old
-      if (g.ground != nullptr)
-         delete [] g.ground;
-      g.ground = new double[10];
-
-      for (int i = 0; i < 10; i++)
-         g.ground[i] = 9.0 - (double)i;
-
-      g.posUpperRight.x = 11000.0;   // 10 pixels
-      g.posUpperRight.y = 11000.0;   // 10 pixels
-      g.iHowitzer = 5;
-      g.iTarget = 7;
-   }
-
-   // standard fixture: teardown
-   void teardownGroundStandardFixture(Ground& g)
-   {
-      assert(-1.0 != g.posUpperRight.metersFromPixels);
       g.posUpperRight.metersFromPixels = metersFromPixels;
    }
-
-};

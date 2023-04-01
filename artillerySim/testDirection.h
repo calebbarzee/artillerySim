@@ -7,6 +7,8 @@
  *   Test the Direction class
  ***************************************************************************/
 
+#pragma once
+
 #include <iostream>
 #include <cassert>
 #include <math.h>

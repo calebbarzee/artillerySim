@@ -25,7 +25,7 @@ public:
   Direction getElevation() const { return elevation; }
   double getMuzzleVelocity() const { return muzzleVelocity; }
 
-  void fire();
+  void fireShell();
   void update(const Interface& ui);
   void draw(ogstream & gout);
 

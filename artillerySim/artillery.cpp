@@ -60,7 +60,7 @@
     }
   }
 
-  void Artillery::fire()
+  void Artillery::fireShell()
   {
     if (shell.getStatus() == Status::IN_FLIGHT)
     {

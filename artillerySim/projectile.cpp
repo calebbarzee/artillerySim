@@ -93,7 +93,7 @@ void Projectile::draw(ogstream & gout) const
     // draw the flight path
     if (status == IN_FLIGHT)
     {
-    int length = flightPath.size();
+    long length = flightPath.size();
     for (int i = 0; i < 10; i++)
     {
         gout.drawProjectile(flightPath[length-i].position, double(i) );

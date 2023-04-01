@@ -6,7 +6,7 @@
  * Summary:
  *    Where we can keep track of the speed of our object.
  ***************************************************************************/
-
+#pragma once
 #include "velocity.h"
 
 //returns the current total speed of object

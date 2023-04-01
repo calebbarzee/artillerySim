@@ -43,7 +43,7 @@ class Projectile
     constexpr static double mass = 46.7; //kilograms
     constexpr static double radius = 0.077545; //meters
     constexpr static double area = 0.0188424183; //meters^2
-    constexpr static double timeInterval = 1.0; //seconds
+    double timeInterval; //seconds
     vector<PVT> flightPath;
     Velocity velocity;
     Acceleration acceleration;
@@ -56,10 +56,8 @@ class Projectile
     friend TestProjectile;
 
     //constructors
-    Projectile() : position(Position()), angle(Direction(45)), timeElapsed(0), status(IN_BARREL){}; //default
-    Projectile(Position position, Direction angle, double muzzleVelocity) : position(position), angle(angle), timeElapsed(0), status(IN_BARREL) {
-        velocity.setVelocity( muzzleVelocity, angle.getRadians() );
-    }
+    Projectile() : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL), timeInterval(1.0){}; //default
+    Projectile(double interval) : position(Position()), angle(Direction(M_PI_4)), timeElapsed(0), status(IN_BARREL), timeInterval(interval){};
 
     //calc methods
     void reset();
