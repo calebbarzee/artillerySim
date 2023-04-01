@@ -150,7 +150,7 @@ private:
       pos.x = 111.0;
       pos.y = 222.0;
       double d;
-      d.radians = M_PI_2;
+      d = M_PI_2;
       double muzzleVelocity(100.0);
       // exercise
       p.fire(pos, d, muzzleVelocity);
