@@ -32,6 +32,8 @@ public:
    // Constructors
    Acceleration() : ddx(0.0), ddy(0.0) {};
    Acceleration(double ddx, double ddy) : ddx(ddx), ddy(ddy) {};
+   Acceleration(double magnitude, Direction direction) :
+   ddx(calcDdx(magnitude, direction.getRadians())), ddy(calcDdy(magnitude, direction.getRadians())) {};
    
    // Getters
    double getDdx() const {return ddx;}
@@ -40,6 +42,7 @@ public:
    // Setters
    void setDdx(double ddx) { this->ddx = ddx; }
    void setDdy(double ddy) { this->ddy = ddy; }
+   void setDdxDdy(double ddx, double ddy) { setDdx(ddx); setDdy(ddy); }
    void setAcceleration(double acceleration, Direction direction)
    {
       setDdx(calcDdx(acceleration, direction.getRadians()));
@@ -47,8 +50,31 @@ public:
    }
 
    // Compute vector components of velocity
-   double calcDdx(double a, double angle) { return sin(angle) * a;}
-   double calcDdy(double a, double angle) { return cos(angle) * a;}
+   static double calcDdx(double a, double angle) { return cos(angle) * a;}
+   static double calcDdy(double a, double angle) { return sin(angle) * a;}
+   
+   /****************************************************************************
+    * Operater Overload += acceleration ():
+    *   Adds an acceleration to an acceleration.
+    ****************************************************************************/
+   Acceleration & operator += (const Acceleration & rhs)
+   {
+      this->setDdx(this->getDdx() + rhs.getDdx());
+      this->setDdy(this->getDdy() + rhs.getDdy());
+      return *this;
+   }
+   /****************************************************************************
+    * Operater Overload = acceleration ():
+    *    Assigns the values of an acceleration vector to another acceleration vector.
+    *    Ex. ddx = ddx, ddy = ddy
+    ****************************************************************************/
+   Acceleration & operator = (const Acceleration & rhs)
+   {
+      this->setDdx(rhs.getDdx());
+      this->setDdy(rhs.getDdy());
+      return *this;
+   }
+   
 private:
    double ddx;
    double ddy;

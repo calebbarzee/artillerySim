@@ -33,7 +33,7 @@ using namespace std;
   *  - testGetReverseAngle(): tests the getReverseAngle() method
   *  - testSetDx(): tests the setDx() method
   *  - testSetDy(): tests the setDy() method
-  *  - testSetSpeedVector(): tests the setSpeedVector() method
+  *  - testSetVelocity(): tests the setVelocity() method
   *  - testCalcDx(): tests the calcDx() method
   *  - testCalcDy(): tests the calcDy() method
   *  - testAddAcceleration(): tests the addAcceleration() method
@@ -55,7 +55,7 @@ public:
       testGetReverseAngle();
       testSetDx();
       testSetDy();
-      testSetSpeedVector();
+      testSetVelocity();
       testCalcDx();
       testCalcDy();
       testAddAcceleration();
@@ -132,7 +132,7 @@ private:
     Velocity v(3, 4);
     //exercise
     //verify
-    assert(closeEnough(v.getAngle(), -0.64350110879, 0.0001));
+    assert(closeEnough(v.getAngle(), 0.927295, 0.0001));
     //teardown
   }
   void testGetReverseAngle()
@@ -141,7 +141,7 @@ private:
     Velocity v(3, 4);
     //exercise
     //verify
-    assert(closeEnough(v.getReverseAngle(), 2.4980916535, 0.0001));
+    assert(closeEnough(v.getReverseAngle(), 4.068887, 0.0001));
     //teardown
   }
   void testSetDx()
@@ -164,19 +164,19 @@ private:
     assert(v.dy == 5);
     //teardown
   }
-  void testSetSpeedVector()
+  void testSetVelocity()
   {
     //setup
     Velocity v(3, 4);
     //exercise
-    v.setSpeedVector(100, 0); //takes a speed and an angle
+    v.setVelocity(100, M_PI_2); //takes a speed and an angle
     //verify
-    assert(v.dx == 0);
+    assert(closeEnough(v.dx, 0.0, 0.0001));
     assert(v.dy == 100);
 
 
     //exercise
-    v.setSpeedVector(100, M_PI); //takes a speed and an angle
+    v.setVelocity(100, -M_PI_2); //takes a speed and an angle
     //verify
     assert(closeEnough(v.dx, 0.0, 0.0001));
     assert(v.dy == -100);
@@ -188,17 +188,25 @@ private:
     //setup
     Velocity v;
     //exercise
-    double dx = v.calcDx(20, M_PI / 2);
+    double dx = v.calcDx(20, 0);
     //verify
     assert(closeEnough(dx, 20, 0.0001));
+     //exercise
+     dx = v.calcDx(20, M_PI);
+     //verify
+     assert(closeEnough(dx, -20, 0.0001));
     //teardown
   }
   void testCalcDy()
   {
     //setup
     Velocity v;
+     //exercise
+     double dy = v.calcDy(20, M_PI_2);
+     //verify
+     assert(closeEnough(dy, 20, 0.0001));
     //exercise
-    double dy = v.calcDy(20, M_PI);
+    dy = v.calcDy(20, -M_PI_2);
     //verify
     assert(closeEnough(dy, -20, 0.0001));
     //teardown

@@ -43,7 +43,7 @@ public:
     * Direction(double):
     *   non-default constructor initialize direction to given degrees.
     ****************************************************************************/
-   Direction(double aDegrees):radians(normalize(convertToRadians(aDegrees))){}
+   Direction(double aRadians):radians(normalize(aRadians)){}
    
    /****************************************************************************
     * Direction(const Direction &):
@@ -90,38 +90,38 @@ public:
    
    /****************************************************************************
     * setDown():
-    *   sets radians to pi. (180 degrees)
+    *   sets radians to -PI/2
     ****************************************************************************/
    void setDown()
    {
-      radians = normalize(M_PI);
+      radians = normalize(-M_PI_2);
    }
    
    /****************************************************************************
     * setLeft():
-    *   sets radians to 3*pi/2. (270 degrees)
+    *   sets radians to PI
     ****************************************************************************/
    void setLeft()
    {
-      radians = normalize(3 * M_PI / 2);
+      radians = normalize(M_PI);
    }
 
    /****************************************************************************
     * setRight():
-    *   sets radians to pi/2. (90 degrees)
+    *   sets radians to 0
     ****************************************************************************/
    void setRight()
    {
-      radians = normalize(M_PI / 2);
+      radians = normalize(0);
    }
    
    /****************************************************************************
     * setUp():
-    *   sets radians to 0. (0 degrees)
+    *   sets radians to PI/2
    ****************************************************************************/
    void setUp()
    {
-      radians = normalize(0);
+      radians = normalize(M_PI_2);
    }
    
    /****************************************************************************
@@ -132,6 +132,14 @@ public:
    {
       radians = normalize(radians + M_PI);
    }
+     /****************************************************************************
+    * getReverse():
+    *   sets radians to the opposite direction by adding pi (180 degrees).
+    ****************************************************************************/
+   double getReverse()
+   {
+      return normalize(radians + M_PI);
+   }
 
    /****************************************************************************
     * Operater Overload ++x ():
@@ -139,7 +147,7 @@ public:
     ****************************************************************************/
    Direction & operator ++()
    {
-      radians = normalize(radians + convertToRadians(1));
+      radians = normalize(radians + 0.1);
       return *this;
    }
 
@@ -150,7 +158,7 @@ public:
    Direction operator ++(int postfix)
    {
       Direction temp(*this);
-      radians = normalize(radians + convertToRadians(1));
+      radians = normalize(radians + 0.1);
       return temp;
    }
 
@@ -160,7 +168,7 @@ public:
     ****************************************************************************/
    Direction & operator --()
    {
-      radians = normalize(radians - convertToRadians(1));
+      radians = normalize(radians - 0.1);
       return *this;
    }
 
@@ -171,7 +179,7 @@ public:
    Direction operator --(int postfix)
    {
       Direction temp(*this);
-      radians = normalize(radians - convertToRadians(1));
+      radians = normalize(radians - 0.1);
       return temp;
    }
 

@@ -22,7 +22,7 @@ struct Mapping
 };
 
 double area_from_radius(double r);
-double force_from_drag(double density, double drag, double radius, double velocity);
+double force_from_drag(double density, double drag, double area, double velocity);
 double acceleration_from_force(double force, double mass);
 double velocity_from_acceleration(double acceleration, double time);
 double linear_interpolation(double d0, double r0, double d1, double r1, double d);

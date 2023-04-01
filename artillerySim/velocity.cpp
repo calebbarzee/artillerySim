@@ -18,16 +18,16 @@ double Velocity::getSpeed() const
 double Velocity::getAngle() const
 {
    // arctan2 takes y then x and knows context of quadrant
-   return atan2(dy, dx) - M_PI_2;
+   return atan2(dy, dx);
 }
 //returns the reverse of the current angle of object in radians
 double Velocity::getReverseAngle() const
 {
    // atan returns a value between -pi/2 and pi/2
-   return atan2(dy, dx) - M_PI_2 + M_PI;
+   return atan2(dy, dx) + M_PI;
 }
 //sets dx and dy based on speed and angle
-void Velocity::setSpeedVector(double speed, double angle)
+void Velocity::setVelocity(double speed, double angle)
 {
    setDx(calcDx(speed, angle));
    setDy(calcDy(speed, angle));

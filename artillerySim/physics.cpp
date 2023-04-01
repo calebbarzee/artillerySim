@@ -12,9 +12,8 @@ double area_from_radius(double r)
 /****************************************************************************
  * Force From Drag
  ***************************************************************************/
-double force_from_drag(double density, double drag, double radius, double velocity)
+double force_from_drag(double density, double drag, double area, double velocity)
 {
-   double area = area_from_radius(radius);
    return 0.5 * density * drag * area * (velocity * velocity);
 }
 /****************************************************************************

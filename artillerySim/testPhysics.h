@@ -53,9 +53,9 @@ class TestPhysics
       assert(0.0 == force_from_drag(1.0, 0.0, 1.0, 1.0));
       assert(0.0 == force_from_drag(0.0, 1.0, 1.0, 1.0));
 
-      assert(1.0 * M_PI == force_from_drag(2.0, 1.0, 1.0, 1.0));
-      assert(1.0 * M_PI == force_from_drag(1.0, 2.0, 1.0, 1.0));
-      assert(2.0 * M_PI == force_from_drag(1.0, 1.0, 2.0, 1.0));
+      assert(1.0 * M_PI == force_from_drag(2.0, 1.0, M_PI, 1.0));
+      assert(1.0 * M_PI == force_from_drag(1.0, 2.0, M_PI, 1.0));
+      assert(2.0 * M_PI == force_from_drag(1.0, 1.0, 4.0 * M_PI, 1.0));
     }
   void test_acceleration_from_force() const
     {

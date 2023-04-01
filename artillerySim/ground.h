@@ -14,6 +14,7 @@
 
 // forward declaration for the Ground unit tests
 class TestGround;
+class TestProjectile;
 
  /***********************************************************
   * GROUND
@@ -23,6 +24,7 @@ class Ground
 {
    // unit test access
    friend TestGround;
+   friend TestProjectile;
 
 public:
    // the constructor generates the ground

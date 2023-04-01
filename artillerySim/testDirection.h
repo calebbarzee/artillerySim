@@ -79,14 +79,14 @@ class TestDirection
   {
       //setup
       //exercise
-      Direction d(180);
+      Direction d(M_PI);
       //verify
       assert(d.radians == M_PI);
       assert(d.getRadians() == M_PI);
       assert(d.getDegrees() == 180.0);
 
       //exercise
-      Direction d2(-180);
+      Direction d2(-M_PI);
       //verify
       assert(d2.radians == M_PI);
       assert(d2.getRadians() == M_PI);
@@ -97,14 +97,14 @@ class TestDirection
   {
      //setup
      //exercise
-     Direction d(180);
+     Direction d(M_PI);
      Direction d2(d);
      //verify
      assert(d2.getRadians() == M_PI);
      assert(d2.getDegrees() == 180.0);
 
       //exercise
-      Direction d3(-540);
+      Direction d3(-3*M_PI);
       Direction d4(d3);
       //verify
       assert(d4.radians == M_PI);
@@ -427,9 +427,9 @@ class TestDirection
       //exercise
       d.setDown();
       //verify
-      assert(d.radians == M_PI);
-      assert(d.getRadians() == M_PI);
-      assert(d.getDegrees() == 180.0);
+      assert(d.radians == -M_PI_2);
+      assert(d.getRadians() == -M_PI_2);
+      assert(d.getDegrees() == -90.0);
 
       //teardown
   }
@@ -441,9 +441,9 @@ class TestDirection
       //exercise
       d.setLeft();
       //verify
-      assert(d.radians == -M_PI_2);
-      assert(d.getRadians() == -M_PI_2);
-      assert(d.getDegrees() == -90.0);
+      assert(d.radians == M_PI);
+      assert(d.getRadians() == M_PI);
+      assert(d.getDegrees() == 180.0);
 
       //teardown
   }
@@ -455,9 +455,9 @@ class TestDirection
       //exercise
       d.setRight();
       //verify
-      assert(d.radians == M_PI / 2);
-      assert(d.getRadians() == M_PI / 2);
-      assert(d.getDegrees() == 90.0);
+      assert(d.radians == 0);
+      assert(d.getRadians() == 0);
+      assert(d.getDegrees() == 0.0);
 
       //teardown
   }
@@ -469,9 +469,9 @@ class TestDirection
       //exercise
       d.setUp();
       //verify
-      assert(d.radians == 0.0);
-      assert(d.getRadians() == 0.0);
-      assert(d.getDegrees() == 0.0);
+      assert(d.radians == M_PI_2);
+      assert(d.getRadians() == M_PI_2);
+      assert(d.getDegrees() == 90.0);
 
       //teardown
   }

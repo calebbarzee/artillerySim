@@ -2,6 +2,9 @@
 
 #include "direction.h"
 #include "position.h"
+#include "ground.h"
+#include "projectile.h"
+#include "uiInteract.h"
 
 class TestArtillery;
 
@@ -9,10 +12,9 @@ class Artillery
 {
 public:
   friend class TestArtillery;
-  Artillery() : position(Position()), elevation(Direction(45)) {};
-  Artillery(Position pos) : position(pos), elevation(Direction(45)) {};
-  void generatePosition(Position pos);   
-  void move(Direction direction);
+  Artillery() : position(Position()), elevation(Direction(M_PI_4)) {};
+  Artillery(Position pos) : position(pos), elevation(Direction(M_PI_4)) {};
+  void generatePosition(Position pos);
   void moveRight();
   void moveLeft();
   void moveUp();
@@ -21,9 +23,16 @@ public:
   void setPosition(Position position);
   Position getPosition() const { return position; }
   Direction getElevation() const { return elevation; }
-  double getMuzzleVelocity();
+  double getMuzzleVelocity() const { return muzzleVelocity; }
+
+  void fire();
+  void update(const Interface& ui);
+  void draw(ogstream & gout);
+
+  Projectile shell;
 private:
+  constexpr static double muzzleVelocity = 827.0;
   Position position;
-   constexpr static double muzzleVelocity = 827.0;
   Direction elevation;
+  double timeSinceFire;
 };

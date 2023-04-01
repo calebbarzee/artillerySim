@@ -57,7 +57,7 @@ public:
    // Setters
    void setDx(double dx) { this->dx = dx; }
    void setDy(double dy) { this->dy = dy; }
-   void setSpeedVector(double speed, double angle);
+   void setVelocity(double speed, double angle);
 
    // Compute new velocity
    void addAcceleration(const Acceleration & a, float t);
@@ -67,6 +67,6 @@ private:
    double dx;
    double dy;
    // Compute vector components of velocity
-   static double calcDx(double v, double angle) { return sin(angle) * v;}
-   static double calcDy(double v, double angle) { return cos(angle) * v;}
+   static double calcDx(double v, double angle) { return cos(angle) * v;}
+   static double calcDy(double v, double angle) { return sin(angle) * v;}
 };
